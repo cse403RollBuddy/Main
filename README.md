@@ -8,7 +8,7 @@ Our project proposes to create an application that allows D&D5E players to creat
 
 ## Goals
 
-###Major Features:
+Major Features:
 
 
 
@@ -18,7 +18,7 @@ Our project proposes to create an application that allows D&D5E players to creat
 4. Perform ability check dice rolls with appropriate dice and modifiers.
 5. Perform spell rolls, including spell checks and spell damage, with appropriate dice and modifiers.
 
-###Stretch Goals:
+Stretch Goals:
 
 
 
