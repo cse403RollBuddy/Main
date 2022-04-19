@@ -627,3 +627,5 @@ Numbers & Notes for Character Creation:
         
         TRINKETS: same as above?
         
+        test change
+        
