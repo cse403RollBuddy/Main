@@ -1,14 +1,14 @@
 # Project: RollBuddy
 
 
-# Idea
+## Idea
 
 Our project proposes to create an application that allows D&D5E players to create or import characters, track changing aspects to the character through multiple play sessions, and view character information in an intuitive UI. Most importantly, it will also tell players what their bonuses are to various kinds of rolls, allow players to actually simulate rolling the dice within the application, and automatically apply the modifiers to display the final result.
 
 
-# Goals
+## Goals
 
-Major Features:
+###Major Features:
 
 
 
@@ -18,7 +18,7 @@ Major Features:
 4. Perform ability check dice rolls with appropriate dice and modifiers.
 5. Perform spell rolls, including spell checks and spell damage, with appropriate dice and modifiers.
 
-Stretch Goals:
+###Stretch Goals:
 
 
 
@@ -27,7 +27,7 @@ Stretch Goals:
 3. New to D&D vs Power User interface
 
 
-# Layout of the repository 
+## Layout of the repository 
 
 
 
@@ -38,10 +38,10 @@ Stretch Goals:
         2. Test
         3. BugJournal.md
     3. Back End
-        4. Character
-        5. Roll
-        6. Test
-        7. BugJournal.md
+        1. Character
+        2. Roll
+        3. Test
+        4. BugJournal.md
     4. Documentation
-        8. Weekly Reports
-        9. Copy of Living Document
+        1. Weekly Reports
+        2. Copy of Living Document
