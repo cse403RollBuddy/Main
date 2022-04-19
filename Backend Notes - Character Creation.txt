@@ -566,5 +566,64 @@ Numbers & Notes for Character Creation:
         
         Oil: as action, make ranged attack up to 20 ft as above; covers target in oil; they take extra fire damage if applicable (maybe out of scope)
         
-        Poison: 
+        Poison: works for one application to slashing/piercing weapon OR 3 applications to a piece of ammunition (arrow, bolt)
+                apply poison as action, lasts 1 min
+                creature hit by poisoned weapon makes DC 10 Con saving throw: failure = 1d4 poison damage 
+        
+        Potion of Healing: as action, drink or administer to restore 2d4 + 2 hp
+        
+        Pouch: n/a
+        
+        Quiver: n/a (just let # <ammo> be an inventory item to simplify?)
+        
+        Ram, Portable: +4 bonus to Str check for breaking down a door when in-use; if another person helps, gain advantage on the roll
+        
+        Rations: n/a
+        
+        Rope: n/a
+        
+        Scale, Merchant's: n/a
+        
+        Spellbook: see Wizard
+        
+        Spyglass: n/a
+        
+        Tent: n/a
+        
+        Tinderbox: n/a
+        
+        Torch: n/a
+        
+        CONTAINERS: (if we want to handle weight, we may want these)
+          Backpack: 30 lbs
+          Chest: 300 lbs
+          Pouch: 6 lbs
+          Sack: 30 lbs
+          
+        TOOLS: Proficiency with a set of tools = add proficiency bonus to ability checks made while using the tools for their purpose
+          Artisan's Tools: See table in DnD_Beyond
+          
+          Disguise Kit: add prof bonus to visual disguise ability checks
+          
+          Forgery Kit: add prof bonus to physical forgery ability checks
+          
+          Gaming Kit: self-explanatory
+          
+          Herbalism Kit: add prof bonus to identifying or applying herbs checks; required to make antitoxin and potion of healing
+          
+          Musical Instrument: self-explanatory
+          
+          Navigator's Tools: for navigation at sea
+          
+          Poisoner's Kit: add prof bonus to making or using poison ability checks
+          
+          Thieves' Tools: add prof bonus to disarm traps or open locks ability checks
+          
+        MOUNTS AND VEHICLES: probably out of scope? stretch goal?
+        
+        TRADE GOODS: same as above?
+        
+        EXPENSES: same as above?
+        
+        TRINKETS: same as above?
         
