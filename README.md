@@ -31,17 +31,17 @@ Stretch Goals:
 
 
 
-1. Main (Give it a name?)
-    1. README.md
-    2. Front End
-        1. App
-        2. Test
-        3. BugJournal.md
-    3. Back End
-        1. Character
-        2. Roll
-        3. Test
-        4. BugJournal.md
-    4. Documentation
-        1. Weekly Reports
-        2. Copy of Living Document
+Main (Give it a name?)
+* README.md
+* Front End
+    * App
+    * Test
+    * BugJournal.md
+* Back End
+    * Character
+    * Roll
+    * Test
+    * BugJournal.md
+* Documentation
+    * Weekly Reports
+    * Copy of Living Document
