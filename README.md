@@ -33,15 +33,10 @@ Stretch Goals:
 
 Main (Give it a name?)
 * README.md
+    * This file!
 * Front End
-    * App
-    * Test
-    * BugJournal.md
+    * This folder contains the code for the application, testing code for the application, and a bug journal to help us keep track of bugs in the application
 * Back End
-    * Character
-    * Roll
-    * Test
-    * BugJournal.md
+    * This folder contains the code for the character class, the code for the rolls, the localhost server, testing code for the backend, and a bug journal to help us keep track of bugs in the back end.
 * Documentation
-    * Weekly Reports
-    * Copy of Living Document
+    * This folder contains the weekly reports submitted to the project manager, and weekly captures of our living document
