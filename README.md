@@ -1,5 +1,6 @@
 # Project: RollBuddy
 
+Living Document: https://docs.google.com/document/d/1HkBncd28IhJP_KtGiDg5ODc6LID7TRu02IcbO1d5rKc/edit?usp=sharing
 
 ## Idea
 
