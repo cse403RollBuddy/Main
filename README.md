@@ -31,7 +31,7 @@ Stretch Goals:
 
 
 
-Main (Give it a name?)
+Main
 * README.md
     * This file!
 * Front End
