@@ -1,5 +1,6 @@
 # Project: RollBuddy
 
+Living Document: https://docs.google.com/document/d/1HkBncd28IhJP_KtGiDg5ODc6LID7TRu02IcbO1d5rKc/edit?usp=sharing
 
 ## Idea
 
@@ -31,17 +32,12 @@ Stretch Goals:
 
 
 
-Main (Give it a name?)
+Main
 * README.md
+    * This file!
 * Front End
-    * App
-    * Test
-    * BugJournal.md
+    * This folder contains the code for the application, testing code for the application, and a bug journal to help us keep track of bugs in the application
 * Back End
-    * Character
-    * Roll
-    * Test
-    * BugJournal.md
+    * This folder contains the code for the character class, the code for the rolls, the localhost server, testing code for the backend, and a bug journal to help us keep track of bugs in the back end.
 * Documentation
-    * Weekly Reports
-    * Copy of Living Document
+    * This folder contains the weekly reports submitted to the project manager, and weekly captures of our living document
