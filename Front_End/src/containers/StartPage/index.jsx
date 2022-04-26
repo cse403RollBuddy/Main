@@ -1,16 +1,23 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 
 export default function StartPage() {
-  const history = useHistory();
-
-  const onStartClick = () => {
-    history.push("/HomePage");
+  const [dummy, setDummy] = useState(null);
+  const dummyCall = async () => {
+    await fetch("http:localhost:4567/data")
+      .then((response) => response.json())
+      .catch((e) => {
+        alert("Cant get to the server :(");
+        throw new Error("Server unavailable");
+      })
+      .then((data) => {
+        return setDummy(data);
+      });
   };
 
   return (
     <div>
-      <button onClick={onStartClick}>Start Your Adventure</button>
+      <button onClick={dummyCall}> THIS IS A CALL TO THE BACKEND</button>
+      <div>{dummy}</div>
     </div>
   );
 }
