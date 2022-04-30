@@ -12,20 +12,21 @@ Our project proposes to create an application that allows D&D5E players to creat
 Major Features:
 
 
-
 1. Create a character and populate necessary numeric fields during creation (or import info); character info persists across sessions.
-2. Level up a character, updating stats, abilities, and dice modifiers as appropriate
-3. Perform combat rolls, including saving throws, AC checks, to-hit rolls, and damage rolls, all with appropriate dice and modifiers.
-4. Perform ability check dice rolls with appropriate dice and modifiers.
-5. Perform spell rolls, including spell checks and spell damage, with appropriate dice and modifiers.
+2. Load a previously created character.
+3. Update numbers upon certain events (e.g. gaining experience points or gold or taking damage).
+4. Level up a character when enough experience points are earned, and then updating stats, abilities, and dice modifiers as appropriate.
+5. Perform ability check dice rolls with appropriate dice and modifiers.
+
 
 Stretch Goals:
 
 
-
-1. Update numbers upon certain events (e.g. - gaining experience or gold, taking damage, receive a buff/debuff)
-2. Save multiple characters
-3. New to D&D vs Power User interface
+1. Perform combat rolls, including saving throws, AC checks, to-hit rolls, and damage rolls, all with appropriate dice and modifiers.
+2. Perform spell rolls, including spell checks and spell damage, with appropriate dice and modifiers.
+3. Create new characters viea importing data from a properly formatted file.
+4. Apply a temporary buff/debuff to a character that temporarily modifies stat values and affects dice rolls.
+5. Provide different interfaces for new players (with more tips and background info) vs. experienced players.
 
 
 ## Layout of the repository 
@@ -39,5 +40,5 @@ Main
     * This folder contains the code for the application, testing code for the application, and a bug journal to help us keep track of bugs in the application
 * Back End
     * This folder contains the code for the character class, the code for the rolls, the localhost server, testing code for the backend, and a bug journal to help us keep track of bugs in the back end.
-* Documentation
+* Reports
     * This folder contains the weekly reports submitted to the project manager, and weekly captures of our living document
