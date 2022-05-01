@@ -1,23 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
 
 export default function StartPage() {
-  const [dummy, setDummy] = useState(null);
-  const dummyCall = async () => {
-    await fetch("http:localhost:4567/data")
-      .then((response) => response.json())
-      .catch((e) => {
-        alert("Cant get to the server :(");
-        throw new Error("Server unavailable");
-      })
-      .then((data) => {
-        return setDummy(data);
-      });
+  const history = useNavigate();
+
+  const onMainClick = (e) => {
+    e.preventDefault();
+    history("/HomePage");
   };
 
   return (
-    <div>
-      <button onClick={dummyCall}> THIS IS A CALL TO THE BACKEND</button>
-      <div>{dummy}</div>
-    </div>
+    <Button
+      onClickAction={onMainClick}
+      buttonText="Enter HomePage"
+      buttonStyle="red"
+    />
   );
 }

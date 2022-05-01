@@ -5,7 +5,11 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <StartPage />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<StartPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
