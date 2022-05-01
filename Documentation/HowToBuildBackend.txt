@@ -1,0 +1,20 @@
+Step 1: clone the repo from https://github.com/cse403RollBuddy/Main.git or git@github.com:cse403RollBuddy/Main.git
+
+Step 2: from the command line, navigate to the root directory of the git project (e.g., C:\some\directory\Main)
+
+Step 3: from the command line, issue the command 'gradlew' (i.e., type './gradlew' without the quotes and press enter)
+
+Step 4: at this point, if there were no issues, you should be able to issue the command 'gradlew run' (same way
+        as above) and see...
+
+            >Task :run
+            hello!
+
+            BUILD SUCCESSFUL in ns
+            z actionable tasks: x executed, y up-to-date
+
+        ... for some numbers n, x, y, z. At this point the gradle build system is working for our backend system
+        on your machine. Hooray!
+
+
+PROBLEMS?? Contact Jacob, Steve, or Allie (they set the damn thing up).
