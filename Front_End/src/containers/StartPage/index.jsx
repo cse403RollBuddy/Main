@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
+import { MainContainer } from "../../components/CenteredBox";
 
 export default function StartPage() {
   const history = useNavigate();
@@ -11,10 +12,12 @@ export default function StartPage() {
   };
 
   return (
-    <Button
-      onClickAction={onMainClick}
-      buttonText="Enter HomePage"
-      buttonStyle="red"
-    />
+    <MainContainer>
+      <Button
+        onClickAction={onMainClick}
+        buttonText="Enter HomePage"
+        buttonStyle="red"
+      />
+    </MainContainer>
   );
 }
