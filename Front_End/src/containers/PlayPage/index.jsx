@@ -3,28 +3,20 @@ import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
 import {useNavigate} from "react-router-dom";
 
-export default function HomePage() {
+export default function PlayPage() {
   const history = useNavigate();
 
   const onMainClick = (e) => {
-      e.preventDefault();
-      history("PlayPage");
-  };
-  const onCharClick = (e) => {
     e.preventDefault();
-      history("CharacterPage");
+    history("/HomePage");
   };
+
   return (
     <MainContainer>
       <Button
         onClickAction={onMainClick}
-        buttonText="Enter PlayPage"
+        buttonText="Update"
         buttonStyle="red"
-      />
-      <Button
-        onClickAction={onCharClick}
-        buttonText="Edit Character"
-        buttonStyle="blue"
       />
     </MainContainer>
   );
