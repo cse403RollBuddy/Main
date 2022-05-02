@@ -3,17 +3,16 @@ import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
 import {useNavigate} from "react-router-dom";
 import {RollBudyTitle} from "../../components/RollBudyTitle";
-
 export default function HomePage() {
   const history = useNavigate();
 
   const onMainClick = (e) => {
-      e.preventDefault();
-      history("/PlayPage");
+    e.preventDefault();
+    history("/PlayPage");
   };
   const onCharClick = (e) => {
     e.preventDefault();
-      history("/CharacterPage");
+    history("/CharacterPage");
   };
   return (
     <>
