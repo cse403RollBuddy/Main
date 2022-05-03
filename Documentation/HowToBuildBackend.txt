@@ -18,3 +18,5 @@ Step 4: at this point, if there were no issues, you should be able to issue the 
 
 
 PROBLEMS?? Contact Jacob, Steve, or Allie (they set the damn thing up).
+
+TROUBLESHOOTING/KNOWN ISSUES (please add them here as they arise):
