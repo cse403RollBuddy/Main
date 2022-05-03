@@ -5,25 +5,38 @@
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.4.2/samples
  */
 
-apply plugin: 'java'
-apply plugin: 'application'
+plugins {
+    id 'application'
+}
 
-mainClassName = 'HelloTest'
+application {
+    mainClass = 'Back_End.SparkServer'
+}
 
 repositories { 
     mavenCentral() 
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+// Defaults to 11; can put these statements back in if we feel it's necessary
+//sourceCompatibility = 1.8
+//targetCompatibility = 1.8
 
 dependencies {
     implementation "com.sparkjava:spark-core:2.9.3"
-    testImplementation "junit:junit:4.12"
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+    testImplementation 'junit:junit:4.13.2'
+    //testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
 }
 
+/*  What is this doing? I couldn't find any doc about it anywhere; doesn't seem to
+    cause any problem when I comment it out; seeking clarification from Jacob --SP
 jar {
     archiveBaseName = 'gs-gradle'
     archiveVersion =  '0.1.0'
 }
+*/
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
