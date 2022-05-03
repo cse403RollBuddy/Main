@@ -14,7 +14,7 @@ Step 4: at this point, if there were no issues, you should be able to issue the 
         ... At this point the gradle build system is working for our backend system
         on your machine. Hooray!
 
-To set the web server up on your machine listening on port 4567 (i.e., https://localhost:4567):
+To set the web server up on your machine listening on port 4567 (i.e., http://localhost:4567):
     issue the command 'gradlew run' (e.g. ./gradlew run). You should see something like...
 
         > Task :run
