@@ -4,18 +4,39 @@ Step 2: from the command line, navigate to the root directory of the git project
 
 Step 3: from the command line, issue the command 'gradlew' (i.e., type './gradlew' without the quotes and press enter)
 
-Step 4: at this point, if there were no issues, you should be able to issue the command 'gradlew run' (same way
+Step 4: at this point, if there were no issues, you should be able to issue the command 'gradlew build' (same way
         as above) and see...
 
-            >Task :run
-            hello!
+            BUILD SUCCESSFUL in 2s
+            5 actionable tasks: 5 executed
 
-            BUILD SUCCESSFUL in ns
-            z actionable tasks: x executed, y up-to-date
 
-        ... for some numbers n, x, y, z. At this point the gradle build system is working for our backend system
+        ... At this point the gradle build system is working for our backend system
         on your machine. Hooray!
 
+To set the web server up on your machine listening on port 4567 (i.e., https://localhost:4567):
+    issue the command 'gradlew run' (e.g. ./gradlew run). You should see something like...
+
+        > Task :run
+        [main] INFO RollBuddy Server - Listening on: http://localhost:4567
+        [Thread-0] INFO org.eclipse.jetty.util.log - Logging initialized @237ms to org.eclipse.jetty.util.log.Slf4jLog
+        [Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - == Spark has ignited ...
+        [Thread-0] INFO spark.embeddedserver.jetty.EmbeddedJettyServer - >> Listening on 0.0.0.0:4567
+        [Thread-0] INFO org.eclipse.jetty.server.Server - jetty-9.4.31.v20200723; built: 2020-07-23T17:57:36.812Z; git: 450ba27947e13e66baa8cd1ce7e85a4461cacc1d; jvm 11.0.1+13-LTS
+        [Thread-0] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+        [Thread-0] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+        [Thread-0] INFO org.eclipse.jetty.server.session - node0 Scavenging every 660000ms
+        [Thread-0] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@6915d998{HTTP/1.1, (http/1.1)}{0.0.0.0:4567}
+        [Thread-0] INFO org.eclipse.jetty.server.Server - Started @722ms
+
+    ... which means that the server is running on your machine. You can verify this by opening a browser and
+    entering "http://localhost:4557/hello", at which point the browser should display "Hello world".
+    Known Issue: there is no clean way to shut the server down right now, so you will need to send an OS
+                 interrupt (usually ctrl-c from the command line) to shut it down right now. If you are running
+                 the gradle task from an IDE, you can probably shut down the server using some button, at which
+                 point you will be informed of something like "Execution failed for task ':run'"; this is okay
+                 for now until we figure out a nice way to shut the server down cleanly. Gradle just doesn't like
+                 that it initiated execution of a task that ended with an OS interrupt (I think).
 
 PROBLEMS?? Contact Jacob, Steve, or Allie (they set the damn thing up).
 
