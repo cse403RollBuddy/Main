@@ -6,7 +6,7 @@ import {RollBudyTitle} from "../../components/RollBudyTitle";
 export default function HomePage() {
   const history = useNavigate();
 
-  const onMainClick = (e) => {
+  const onPlayClick = (e) => {
     e.preventDefault();
     history("/PlayPage");
   };
@@ -20,13 +20,13 @@ export default function HomePage() {
     <hr/>
     <MainContainer>
       <Button
-        onClickAction={onMainClick}
+        onClickAction={onPlayClick}
         buttonText="Enter PlayPage"
         buttonStyle="red"
       />
       <Button
         onClickAction={onCharClick}
-        buttonText="Edit Character"
+        buttonText="Select Character"
         buttonStyle="blue"
       />
     </MainContainer>

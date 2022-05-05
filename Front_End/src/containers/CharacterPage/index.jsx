@@ -1,26 +1,12 @@
 import React from "react";
 import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
-import {useNavigate} from "react-router-dom";
-import {RollBudyTitle} from "../../components/RollBudyTitle";
+import { useNavigate } from "react-router-dom";
 
 export default function CharacterPage() {
-  const history = useNavigate();
-
-  const onMainClick = (e) => {
-    e.preventDefault();
-    history("/HomePage");
-  };
   return (
-    <>
-      <RollBudyTitle> RollBudy </RollBudyTitle>
-      <hr/>
-      <MainContainer>
-        <Button
-          onClickAction={onMainClick}
-          buttonText="Update"
-          buttonStyle="red" />
-      </MainContainer>
-    </>
+    <MainContainer>
+      <Button buttonText="Create new Character" buttonStyle="red" />
+    </MainContainer>
   );
 }

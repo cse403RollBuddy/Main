@@ -43,14 +43,14 @@ const BlueButtonStyle = styled.button`
         transition: all 0.4s ease 0s;
       }
     `;
-export default function Button({ onClickAction, buttonText, buttonStyle }) {
-  if (buttonStyle === "red") {
+export default function Button({ onClickAction, buttonText, buttonColor }) {
+  if (buttonColor === "red") {
     return (
       <RedButtonStyle onClick={onClickAction}>{buttonText}</RedButtonStyle>
     );
-  } else if(buttonStyle === "blue") {
+  } else if (buttonColor === "blue") {
     return (
-        <BlueButtonStyle onClick={onClickAction}>{buttonText}</BlueButtonStyle>
+      <BlueButtonStyle onClick={onClickAction}>{buttonText}</BlueButtonStyle>
     );
   }
   return <button onClick={onClickAction}>{buttonText}</button>;
