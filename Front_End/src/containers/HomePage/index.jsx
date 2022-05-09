@@ -1,10 +1,23 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
 import { useNavigate } from "react-router-dom";
-import { RollBuddyTitle } from "../../components/RollBuddyTitle";
+import {Nav, RollBuddyTitle} from "../../components/RollBuddyTitle";
+import CharacterPageService from "../CharacterPage/service";
+import Input from "../../components/Input";
+import DropDownList from "../../components/DropDownList";
 export default function HomePage() {
   const history = useNavigate();
+  const [characters, setChars] = useState([]);
+  const [selectedChar, setSelectedChar] = useState();
+
+  async function getChars() {
+    return CharacterPageService.getChars();
+  }
+
+  useEffect(() => {
+    setChars(getChars());
+  }, []);
 
   const onPlayClick = (e) => {
     e.preventDefault();
@@ -16,9 +29,17 @@ export default function HomePage() {
   };
   return (
     <div>
-      <RollBuddyTitle> RollBuddy </RollBuddyTitle>
-      <hr />
+      <Nav>
+        <h1 className="app-title">ROLL BUDDY</h1>
+      </Nav>
       <MainContainer>
+        <DropDownList
+            label={"Select Character"}
+            isMulti={false}
+            maxMenuHeight={150}
+            setSelectedOptions={setSelectedChar}
+            list={characters}
+        />
         <Button
           onClickAction={onPlayClick}
           buttonText="Enter PlayPage"
@@ -26,7 +47,7 @@ export default function HomePage() {
         />
         <Button
           onClickAction={onCharClick}
-          buttonText="Select Character"
+          buttonText="Create Character"
           buttonColor="blue"
         />
       </MainContainer>

@@ -2,20 +2,20 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
-import { RollBuddyTitle } from "../../components/RollBuddyTitle";
+import {Nav, RollBuddyTitle} from "../../components/RollBuddyTitle";
 
 export default function StartPage() {
   const history = useNavigate();
-
   const onMainClick = (e) => {
     e.preventDefault();
     history("/HomePage");
   };
 
   return (
-    <>
-      <RollBuddyTitle> RollBuddy </RollBuddyTitle>
-      <hr />
+    <div>
+      <Nav>
+         <h1 className="app-title">ROLL BUDDY</h1>
+      </Nav>
       <MainContainer>
         <Button
           onClickAction={onMainClick}
@@ -23,6 +23,6 @@ export default function StartPage() {
           buttonColor="red"
         />
       </MainContainer>
-    </>
+    </div>
   );
 }
