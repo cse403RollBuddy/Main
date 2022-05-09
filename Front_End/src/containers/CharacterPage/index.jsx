@@ -4,6 +4,7 @@ import { MainContainer } from "../../components/CenteredBox";
 import Input from "../../components/Input/index";
 import DropDownList from "../../components/DropDownList/index";
 import CharacterPageService from "./service";
+import {RollBuddyTitle} from "../../components/RollBuddyTitle";
 
 export default function CharacterPage() {
   const [races, setRaces] = useState([]);
@@ -26,6 +27,9 @@ export default function CharacterPage() {
   }, []);
 
   return (
+    <>
+      <RollBuddyTitle> RollBudy </RollBuddyTitle>
+      <hr />
     <div>
       <MainContainer>
         <Input placeholder={"Character name"} />
@@ -56,5 +60,6 @@ export default function CharacterPage() {
         <Button buttonColor={"red"} buttonText={"Submit"} />
       </MainContainer>
     </div>
+    </>
   );
 }

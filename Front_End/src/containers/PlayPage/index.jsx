@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
 import { useNavigate } from "react-router-dom";
-import { RollBudyTitle } from "../../components/RollBudyTitle";
+import { RollBuddyTitle } from "../../components/RollBuddyTitle";
 
 export default function PlayPage() {
   const history = useNavigate();
@@ -14,7 +14,7 @@ export default function PlayPage() {
 
   return (
     <>
-      <RollBudyTitle> RollBudy </RollBudyTitle>
+      <RollBuddyTitle> RollBudy </RollBuddyTitle>
       <hr />
       <MainContainer>
         <Button

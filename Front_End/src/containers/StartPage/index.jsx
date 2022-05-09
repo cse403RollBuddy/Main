@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
-import { RollBudyTitle } from "../../components/RollBudyTitle";
+import { RollBuddyTitle } from "../../components/RollBuddyTitle";
 
 export default function StartPage() {
   const history = useNavigate();
@@ -14,7 +14,7 @@ export default function StartPage() {
 
   return (
     <>
-      <RollBudyTitle> RollBudy </RollBudyTitle>
+      <RollBuddyTitle> RollBuddy </RollBuddyTitle>
       <hr />
       <MainContainer>
         <Button
