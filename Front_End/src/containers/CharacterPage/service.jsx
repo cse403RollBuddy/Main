@@ -1,5 +1,5 @@
 const getRaces = async () => {
-  await fetch("htt[://localhost:4567/races")
+  await fetch("http://localhost:4567/races")
     .then((response) => response.json())
     .catch((e) => {
       //   alert("races unavailable");
@@ -11,7 +11,7 @@ const getRaces = async () => {
 };
 
 const getBackground = async () => {
-  await fetch("htt[://localhost:4567/background")
+  await fetch("http://localhost:4567/background")
     .then((response) => response.json())
     .catch((e) => {
       //   alert("background unavailable");
@@ -22,8 +22,8 @@ const getBackground = async () => {
     });
 };
 
-const getLevels = async () => {
-  await fetch("htt[://localhost:4567/levels")
+const getClasses = async () => {
+  await fetch("http://localhost:4567/classes")
     .then((response) => response.json())
     .catch((e) => {
       //   alert("levels unavailable");
@@ -34,5 +34,5 @@ const getLevels = async () => {
     });
 };
 
-const CharacterPageService = { getRaces, getBackground, getLevels };
+const CharacterPageService = { getRaces, getBackground, getClasses };
 export default CharacterPageService;
