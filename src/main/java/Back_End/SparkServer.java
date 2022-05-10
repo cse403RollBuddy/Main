@@ -92,19 +92,15 @@ public class SparkServer {
                               abilities.put("Intelligence", 1);
                               abilities.put("Wisdom", 1);
                               abilities.put("Charisma", 1);
-                              beingCreated.set_race(Races.HUMAN);
                               break;
                 case "ELF":   abilities.put("Dexterity", 2);
                               abilities.put("Wisdom", 1);
-                              beingCreated.set_race(Races.ELF);
                               break;
                 case "DWARF": abilities.put("Constitution", 2);
                               abilities.put("Strength", 2);
-                              beingCreated.set_race(Races.DWARF);
                               break;
                 case "HALFLING": abilities.put("Dexterity", 2);
                                  abilities.put("Constitution", 1);
-                                 beingCreated.set_race(Races.HALFLING);
                                  break;
             }
             return gson.toJson(abilities);
@@ -127,22 +123,25 @@ public class SparkServer {
 
         // saves character info to file
         post("/save", (req, res) -> {
+            Character.verifyDirectoryAndCharacterFiles();
             String character = req.queryParams("character").toUpperCase();
             Map map = gson.fromJson(character, Map.class);
+
+            //Set Ability Scores
+            beingCreated.set_strength((Integer) map.get("strength"));
+            beingCreated.set_charisma((Integer) map.get("charisma"));
+            beingCreated.set_dexterity((Integer) map.get("dexterity"));
+            beingCreated.set_intelligence((Integer) map.get("intelligence"));
+            beingCreated.set_wisdom((Integer) map.get("wisdom"));
+            beingCreated.set_constitution((Integer) map.get("constitution"));
+
             //Set info
             beingCreated.set_name((String) map.get("name"));
-            beingCreated.set_race(race);
-            beingCreated.set_background(background);
-            beingCreated.set_class(c);
-            
-            //Set Ability Scores
-            beingCreated.set_strength(v);
-            beingCreated.set_charisma(v);
-            beingCreated.set_dexterity(v);
-            beingCreated.set_intelligence(v);
-            beingCreated.set_wisdom(v);
-            beingCreated.set_constitution(v);
+            beingCreated.set_race(Races.valueOf((String) map.get("race")));
+            beingCreated.set_background(Backgrounds.valueOf((String) map.get("background")));
+            beingCreated.set_class(Classes.valueOf((String) map.get("class")));
 
+            // write character
             Character.writeCharacterToFile(beingCreated);
             return "Successfully written to file";
         });
