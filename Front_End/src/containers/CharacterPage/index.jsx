@@ -37,6 +37,10 @@ export default function CharacterPage() {
     getClasses();
   }, []);
 
+  useEffect(() => {
+    getAbilityScores();
+  }, [selectedRace]);
+
   async function getRaces() {
     await fetch("http://localhost:4567/races")
       .then((response) => response.json())
@@ -73,6 +77,17 @@ export default function CharacterPage() {
       });
   }
 
+  const getAbilityScores = async () => {
+    if (selectedRace) {
+      await fetch("http://localhost:4567/path?race=" + selectedRace)
+        .then((response) => response.json())
+        .catch((e) => {
+          throw new Error("server unavailable");
+        })
+        .then((data) => {});
+    }
+  };
+
   const handleNewName = (event) => {
     setName(event.target.value);
   };
@@ -83,9 +98,6 @@ export default function CharacterPage() {
         <h1 className="app-title">ROLLBUDDY</h1>
       </Nav>
       <MainContainer>
-        <Nav>
-          <h1 className="app-title">ROLL BUDDY</h1>
-        </Nav>
         <Input
           placeholder={"Enter character name"}
           value={name}
@@ -121,7 +133,6 @@ export default function CharacterPage() {
             label: name,
           }))}
         />
-        <Button buttonColor={"red"} buttonText={"Submit"} />
         <Ability
           label={"strength score"}
           readonly={true}
