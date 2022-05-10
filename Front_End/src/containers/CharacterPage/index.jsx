@@ -31,8 +31,22 @@ export default function CharacterPage() {
     history("/HomePage");
   };
 
+  useEffect(() => {
+    getBackground();
+    getRaces();
+    getClasses();
+  }, []);
+
   async function getRaces() {
-    return CharacterPageService.getRaces();
+    await fetch("http://localhost:4567/races")
+      .then((response) => response.json())
+      .catch((e) => {
+        //   alert("races unavailable");
+        throw new Error("server unavailable");
+      })
+      .then((data) => {
+        return setRaces(data.split(" "));
+      });
   }
 
   const getBackground = async () => {
@@ -43,26 +57,25 @@ export default function CharacterPage() {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        setBackgrounds(data);
+        return setBackgrounds(data.split(" "));
       });
   };
-  useEffect(()=>{
-    getBackground();
-  },[])
+
   async function getClasses() {
-    return CharacterPageService.getClasses();
+    await fetch("http://localhost:4567/classes")
+      .then((response) => response.json())
+      .catch((e) => {
+        //   alert("levels unavailable");
+        throw new Error("server unavailable");
+      })
+      .then((data) => {
+        return setClasses(data.split(" "));
+      });
   }
 
   const handleNewName = (event) => {
     setName(event.target.value);
   };
-
-  useEffect(() => {
-    setRaces(getRaces());
-    setBackgrounds(getBackground());
-    console.log(backgrounds);
-    setClasses(getClasses());
-  }, []);
 
   return (
     <div>
@@ -83,21 +96,30 @@ export default function CharacterPage() {
           isMulti={false}
           maxMenuHeight={150}
           setSelectedOptions={setSelectedRace}
-          list={races}
+          list={races.map((name) => ({
+            value: name,
+            label: name,
+          }))}
         />
         <DropDownList
           label={"Background"}
           isMulti={false}
           maxMenuHeight={150}
           setSelectedOptions={setSelectedBackground}
-          list={backgrounds}
+          list={backgrounds.map((name) => ({
+            value: name,
+            label: name,
+          }))}
         />
         <DropDownList
           label={"Class"}
           isMulti={false}
           maxMenuHeight={150}
           setSelectedOptions={setSelectedClass}
-          list={classes}
+          list={classes.map((name) => ({
+            value: name,
+            label: name,
+          }))}
         />
         <Button buttonColor={"red"} buttonText={"Submit"} />
         <Ability
