@@ -16,7 +16,7 @@ public class SparkServer {
         CORSFilter corsFilter = new CORSFilter();
         corsFilter.apply();
 
-        Spark.get("/data", (req, res) -> {
+        get("/data", (req, res) -> {
             ExampleDataTransfer example = new ExampleDataTransfer();
             return example.getData();
         });
