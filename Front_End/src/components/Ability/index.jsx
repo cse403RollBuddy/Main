@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "../Button";
-import {MainContainer} from "../CenteredBox";
+import { MainContainer } from "../CenteredBox";
 import React from "react";
 
 export const InputBox = styled.input`
@@ -13,7 +13,17 @@ export const InputBox = styled.input`
   align-items: left;
 `;
 
-export default function Ability({ label, type, placeholder, value, onChange, onClick }) {
+export default function Ability({
+  label,
+  type,
+  placeholder,
+  value,
+  onChange,
+  onClick,
+}) {
+  // fetch here for dice roll
+  // 4 dies, 6 faces
+
   return (
     <label>
       {label}
@@ -24,9 +34,9 @@ export default function Ability({ label, type, placeholder, value, onChange, onC
         onChange={onChange}
       />
       <Button
-        onClickAction={onClick}
-         buttonText="Roll Dice"
-         buttonColor="red"
+        onClickAction={onClick} // on click would detch dice roll score.
+        buttonText="Roll Dice"
+        buttonColor="red"
       />
     </label>
   );

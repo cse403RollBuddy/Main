@@ -49,7 +49,8 @@ export default function CharacterPage() {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        return setRaces(data.split(" "));
+        data = data.replace(/,/g, "");
+        setRaces(data.split(" "));
       });
   }
 
@@ -61,7 +62,8 @@ export default function CharacterPage() {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        return setBackgrounds(data.split(" "));
+        data = data.replace(/,/g, "");
+        setBackgrounds(data.split(" "));
       });
   };
 
@@ -73,18 +75,22 @@ export default function CharacterPage() {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        return setClasses(data.split(" "));
+        data = data.replace(/,/g, "");
+        setClasses(data.split(" "));
       });
   }
 
   const getAbilityScores = async () => {
     if (selectedRace) {
-      await fetch("http://localhost:4567/path?race=" + selectedRace)
+      await fetch("http://localhost:4567/ability?race=" + selectedRace)
         .then((response) => response.json())
         .catch((e) => {
           throw new Error("server unavailable");
         })
-        .then((data) => {});
+        .then((data) => {
+          setCharisma(data.Charisma);
+          setWisdom(data.Wisdom);
+        });
     }
   };
 
