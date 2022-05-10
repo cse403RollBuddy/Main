@@ -115,8 +115,8 @@ export default function CharacterPage() {
           setScore(data);
         });
   }
-  const setAbility = (setScore, old) =>{
-    setScore(old + score)
+  const setAbility = (setAb, old) =>{
+    setAb(old + score)
   }
   return (
     <div>
@@ -165,7 +165,7 @@ export default function CharacterPage() {
           type={"text"}
           placeholder={"score"}
           value={strength}
-          onClick={()=>{getScore();setAbility(setStrength,1)}}
+          onClick={()=>{getScore();setAbility(setStrength,strength)}}
         />
         <Ability
           label={"charisma score"}
@@ -174,7 +174,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={charisma}
           onChange={setCharisma}
-          onClick={()=>{getScore();setAbility(setCharisma,1)}}
+          onClick={()=>{getScore();setAbility(setCharisma,charisma)}}
         />
         <Ability
           label={"dexterity score"}
@@ -183,7 +183,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={dexterity}
           onChange={setDexterity}
-          onClick={()=>{getScore();setAbility(setDexterity,1)}}
+          onClick={()=>{getScore();setAbility(setDexterity,dexterity)}}
         />
         <Ability
           label={"intelligence score"}
@@ -192,7 +192,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={intelligence}
           onChange={setIntelligence}
-          onClick={()=>{getScore();setAbility(setIntelligence,1)}}
+          onClick={()=>{getScore();setAbility(setIntelligence,intelligence)}}
         />
         <Ability
           label={"wisdom score"}
@@ -201,7 +201,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={wisdom}
           onChange={setWisdom}
-          onClick={()=>{getScore();setAbility(setWisdom,1)}}
+          onClick={()=>{getScore();setAbility(setWisdom,wisdom)}}
         />
         <Ability
           label={"constitution score"}
