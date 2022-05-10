@@ -29,15 +29,15 @@ public class SparkServer {
         );
 
         get("/background", (req, res) -> {
-            return gson.toJson("ACOLYTE, CRIMINAL, SOLDIER");
+            return gson.toJson("ACOLYTE CRIMINAL SOLDIER");
         });
 
         get("/classes", (req, res) -> {
-            return "CLERIC, FIGHTER, ROGUE";
+            return gson.toJson("CLERIC FIGHTER ROGUE");
         });
 
         get("/races", (req, res) -> {
-            return "HUMAN, ELF, DWARF, HALFLING";
+            return gson.toJson("HUMAN ELF DWARF HALFLING");
         });
 
     }
