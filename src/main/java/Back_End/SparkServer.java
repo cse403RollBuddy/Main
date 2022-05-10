@@ -34,11 +34,11 @@ public class SparkServer {
         );
 
 
-        get("/background", (req, res) -> gson.toJson("ACOLYTE, CRIMINAL, SOLDIER"));
+        get("/background", (req, res) -> gson.toJson("ACOLYTE CRIMINAL SOLDIER"));
 
-        get("/classes", (req, res) -> gson.toJson("CLERIC, FIGHTER, ROGUE"));
+        get("/classes", (req, res) -> gson.toJson("CLERIC FIGHTER ROGUE"));
 
-        get("/races", (req, res) -> gson.toJson("HUMAN, ELF, DWARF, HALFLING"));
+        get("/races", (req, res) -> gson.toJson("HUMAN ELF DWARF HALFLING"));
 
     }
 }
