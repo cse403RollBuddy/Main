@@ -16,9 +16,7 @@ export default function CharacterPage() {
   const [classes, setClasses] = useState([]);
   const [selectedRace, setSelectedRace] = useState();
   const [selectedBackground, setSelectedBackground] = useState();
-  const [selectedLevel, setSelectedLevel] = useState();
   const [selectedClass, setSelectedClass] = useState();
-
 
   const [strength, setStrength] = useState();
   const [dexterity, setDexterity] = useState();
@@ -26,11 +24,24 @@ export default function CharacterPage() {
   const [intelligence, setIntelligence] = useState();
   const [wisdom, setWisdom] = useState();
   const [charisma, setCharisma] = useState();
-  const [ score, setScore] = useState();
+  const [score, setScore] = useState(0);
 
   const onMainClick = (e) => {
     e.preventDefault();
-    history("/HomePage");
+    const character = {
+      name: name,
+      race: selectedRace,
+      background: selectedBackground,
+      class: selectedClass,
+      strength: strength,
+      dexterity: dexterity,
+      constitution: constitution,
+      intelligence: intelligence,
+      wisdom: wisdom,
+      charisma: charisma,
+    };
+    submitCharacter(character);
+    history("/PlayPage");
   };
 
   useEffect(() => {
@@ -42,6 +53,14 @@ export default function CharacterPage() {
   useEffect(() => {
     getAbilityScores();
   }, [selectedRace]);
+
+  async function submitCharacter(char) {
+    await fetch("http://localhost:4567/new-character?character=" + char)
+      .then((response) => response.json())
+      .catch((e) => {
+        throw new Error("server unavailable");
+      });
+  }
 
   async function getRaces() {
     await fetch("http://localhost:4567/races")
@@ -84,7 +103,7 @@ export default function CharacterPage() {
 
   const getAbilityScores = async () => {
     if (selectedRace) {
-      await fetch("http://localhost:4567/ability?race=" + selectedRace)
+      await fetch("http://localhost:4567/ability?race=" + selectedRace.value)
         .then((response) => response.json())
         .catch((e) => {
           throw new Error("server unavailable");
@@ -105,19 +124,19 @@ export default function CharacterPage() {
   };
 
   async function getScore() {
-    await fetch("http://localhost:4567/creationroll" )
-        .then((response) => response.json())
-        .catch((e) => {
-          //   alert("races unavailable");
-          throw new Error("server unavailable");
-        })
-        .then((data) => {
-          setScore(data);
-        });
+    await fetch("http://localhost:4567/creationroll")
+      .then((response) => response.json())
+      .catch((e) => {
+        //   alert("races unavailable");
+        throw new Error("server unavailable");
+      })
+      .then((data) => {
+        setScore(data);
+      });
   }
-  const setAbility = (setAb, old) =>{
-    setAb(old + score)
-  }
+  const setAbility = (setAb, old) => {
+    setAb(old + score);
+  };
   return (
     <div>
       <Nav>
@@ -165,7 +184,11 @@ export default function CharacterPage() {
           type={"text"}
           placeholder={"score"}
           value={strength}
-          onClick={()=>{getScore();setAbility(setStrength,strength)}}
+          onChange={setStrength}
+          onClick={() => {
+            getScore();
+            setAbility(setStrength, strength);
+          }}
         />
         <Ability
           label={"charisma score"}
@@ -174,7 +197,10 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={charisma}
           onChange={setCharisma}
-          onClick={()=>{getScore();setAbility(setCharisma,charisma)}}
+          onClick={() => {
+            getScore();
+            setAbility(setCharisma, charisma);
+          }}
         />
         <Ability
           label={"dexterity score"}
@@ -183,7 +209,10 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={dexterity}
           onChange={setDexterity}
-          onClick={()=>{getScore();setAbility(setDexterity,dexterity)}}
+          onClick={() => {
+            getScore();
+            setAbility(setDexterity, dexterity);
+          }}
         />
         <Ability
           label={"intelligence score"}
@@ -192,7 +221,10 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={intelligence}
           onChange={setIntelligence}
-          onClick={()=>{getScore();setAbility(setIntelligence,intelligence)}}
+          onClick={() => {
+            getScore();
+            setAbility(setIntelligence, intelligence);
+          }}
         />
         <Ability
           label={"wisdom score"}
@@ -201,7 +233,10 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={wisdom}
           onChange={setWisdom}
-          onClick={()=>{getScore();setAbility(setWisdom,wisdom)}}
+          onClick={() => {
+            getScore();
+            setAbility(setWisdom, wisdom);
+          }}
         />
         <Ability
           label={"constitution score"}
@@ -210,9 +245,11 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={constitution}
           onChange={setConstitution}
-          onClick={()=>{getScore();setAbility(setConstitution,1)}}
+          onClick={() => {
+            getScore();
+            setAbility(setConstitution, constitution);
+          }}
         />
-
         <Button
           onClickAction={onMainClick}
           buttonText="Update and Play"
