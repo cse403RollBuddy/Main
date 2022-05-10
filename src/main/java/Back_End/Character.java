@@ -503,6 +503,5 @@ public class Character {
             System.out.println(character);
         }
         System.out.println();
-
     }
 }

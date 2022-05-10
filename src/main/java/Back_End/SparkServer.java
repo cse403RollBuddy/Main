@@ -24,18 +24,17 @@ public class SparkServer {
                 "Hello: " + request.params(":name")
         );
 
+        get("/roll/:numDice/:faces", (req, res) ->
+                Dice.roll(Integer.parseInt(req.params(":numDice").trim()),
+                          Integer.parseInt(req.params(":faces").trim()))
+        );
 
-        get("/background", (req, res) -> {
-            return "ACOLYTE, CRIMINAL, SOLDIER";
-        });
 
-        get("/classes", (req, res) -> {
-            return "CLERIC, FIGHTER, ROGUE";
-        });
+        get("/background", (req, res) -> "ACOLYTE, CRIMINAL, SOLDIER");
 
-        get("/races", (req, res) -> {
-            return "HUMAN, ELF, DWARF, HALFLING";
-        });
+        get("/classes", (req, res) -> "CLERIC, FIGHTER, ROGUE");
+
+        get("/races", (req, res) -> "HUMAN, ELF, DWARF, HALFLING");
 
     }
 }

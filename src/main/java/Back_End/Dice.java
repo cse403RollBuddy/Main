@@ -1,15 +1,16 @@
 package Back_End;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Dice {
 
-    public static ArrayList<Integer> Roll (int num, int face) {
+    public static List<Integer> roll (int num, int face) {
         Random rand = new Random();
-        ArrayList<Integer> values = new ArrayList<>(num);
+        List<Integer> values = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            values.set(i, rand.nextInt(face) + 1);
+            values.add(rand.nextInt(face) + 1);
         }
         return values;
     }
