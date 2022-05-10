@@ -19,12 +19,14 @@ export default function CharacterPage() {
   const [selectedLevel, setSelectedLevel] = useState();
   const [selectedClass, setSelectedClass] = useState();
 
+
   const [strength, setStrength] = useState();
   const [dexterity, setDexterity] = useState();
   const [constitution, setConstitution] = useState();
   const [intelligence, setIntelligence] = useState();
   const [wisdom, setWisdom] = useState();
   const [charisma, setCharisma] = useState();
+  const [ score, setScore] = useState();
 
   const onMainClick = (e) => {
     e.preventDefault();
@@ -90,6 +92,10 @@ export default function CharacterPage() {
         .then((data) => {
           setCharisma(data.Charisma);
           setWisdom(data.Wisdom);
+          setDexterity(data.Dexterity);
+          setStrength(data.Strength);
+          setIntelligence(data.Intelligence);
+          setConstitution(data.Constitution);
         });
     }
   };
@@ -98,6 +104,20 @@ export default function CharacterPage() {
     setName(event.target.value);
   };
 
+  async function getScore() {
+    await fetch("http://localhost:4567/creationroll" )
+        .then((response) => response.json())
+        .catch((e) => {
+          //   alert("races unavailable");
+          throw new Error("server unavailable");
+        })
+        .then((data) => {
+          setScore(data);
+        });
+  }
+  const setAbility = (setScore, old) =>{
+    setScore(old + score)
+  }
   return (
     <div>
       <Nav>
@@ -145,8 +165,7 @@ export default function CharacterPage() {
           type={"text"}
           placeholder={"score"}
           value={strength}
-          onChange={setStrength}
-          onClick={setStrength}
+          onClick={()=>{getScore();setAbility(setStrength,1)}}
         />
         <Ability
           label={"charisma score"}
@@ -155,7 +174,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={charisma}
           onChange={setCharisma}
-          onClick={setCharisma}
+          onClick={()=>{getScore();setAbility(setCharisma,1)}}
         />
         <Ability
           label={"dexterity score"}
@@ -164,7 +183,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={dexterity}
           onChange={setDexterity}
-          onClick={setDexterity}
+          onClick={()=>{getScore();setAbility(setDexterity,1)}}
         />
         <Ability
           label={"intelligence score"}
@@ -173,7 +192,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={intelligence}
           onChange={setIntelligence}
-          onClick={setIntelligence}
+          onClick={()=>{getScore();setAbility(setIntelligence,1)}}
         />
         <Ability
           label={"wisdom score"}
@@ -182,7 +201,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={wisdom}
           onChange={setWisdom}
-          onClick={setWisdom}
+          onClick={()=>{getScore();setAbility(setWisdom,1)}}
         />
         <Ability
           label={"constitution score"}
@@ -191,7 +210,7 @@ export default function CharacterPage() {
           placeholder={"score"}
           value={constitution}
           onChange={setConstitution}
-          onClick={setConstitution}
+          onClick={()=>{getScore();setAbility(setConstitution,1)}}
         />
 
         <Button
