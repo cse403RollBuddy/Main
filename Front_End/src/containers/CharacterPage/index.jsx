@@ -30,9 +30,9 @@ export default function CharacterPage() {
     e.preventDefault();
     const character = {
       name: name,
-      race: selectedRace,
-      background: selectedBackground,
-      class: selectedClass,
+      race: selectedRace.value,
+      background: selectedBackground.value,
+      class: selectedClass.value,
       strength: strength,
       dexterity: dexterity,
       constitution: constitution,
@@ -40,6 +40,7 @@ export default function CharacterPage() {
       wisdom: wisdom,
       charisma: charisma,
     };
+    console.log(character);
     submitCharacter(character);
     history("/PlayPage");
   };
