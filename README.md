@@ -42,3 +42,16 @@ Main
     * This folder contains the code for the character class, the code for the rolls, the localhost server, testing code for the backend, and a bug journal to help us keep track of bugs in the back end.
 * Reports
     * This folder contains the weekly reports submitted to the project manager, and weekly captures of our living document
+
+## Instruction to build and test the system
+###backend server
+
+###frontend 
+* System requirement: 
+   * node.js
+   * npm
+* Run the System:
+  - Under the directory of Front_End, ruth the command:   *npm start*
+* Trouble-shooting: 
+  - you might run into react-scripts: command not found Error, then try install react-scripts with command:
+  *npm i react-script*
