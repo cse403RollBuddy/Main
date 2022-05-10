@@ -24,5 +24,18 @@ public class SparkServer {
                 "Hello: " + request.params(":name")
         );
 
+
+        get("/background", (req, res) -> {
+            return "ACOLYTE, CRIMINAL, SOLDIER";
+        });
+
+        get("/classes", (req, res) -> {
+            return "CLERIC, FIGHTER, ROGUE";
+        });
+
+        get("/races", (req, res) -> {
+            return "HUMAN, ELF, DWARF, HALFLING";
+        });
+
     }
 }
