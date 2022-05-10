@@ -9,9 +9,10 @@
     "install": "^0.13.0",
     "npm": "^8.7.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.3.1",
     "web-vitals": "^2.1.0"
   },
   "main": "main.js",
@@ -20,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-react": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\""
+    "clear-snapshots": "npm run test -- -u"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +40,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "jest-styled-components": "^7.0.8",
+    "react-test-renderer": "^18.1.0",
+    "styled-components": "^5.3.5"
   }
 }
