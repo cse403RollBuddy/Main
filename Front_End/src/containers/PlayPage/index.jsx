@@ -14,6 +14,14 @@ export default function PlayPage() {
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState();
 
+  const [strength, setStrength] = useState();
+  const [dexterity, setDexterity] = useState();
+  const [constitution, setConstitution] = useState();
+  const [intelligence, setIntelligence] = useState();
+  const [wisdom, setWisdom] = useState();
+  const [charisma, setCharisma] = useState();
+  const [score, setScore] = useState(0);
+
   async function getCharaters() {
     await fetch("http://localhost:4567/characters")
       .then((response) => response.json())
@@ -48,12 +56,42 @@ export default function PlayPage() {
           options={characters}
           isMulti={false}
         />
-        <Ability label={"Strength"} placeholder={"score"} />
-        <Ability label={"Charisma"} placeholder={"score"} />
-        <Ability label={"Dexterity"} placeholder={"score"} />
-        <Ability label={"Constitution"} placeholder={"score"} />
-        <Ability label={"Intelligence"} placeholder={"score"} />
-        <Ability label={"Wisdom"} placeholder={"score"} />
+        <Ability
+          label={"Strength"}
+          placeholder={"score"}
+          value={strength}
+          onChange={setStrength}
+        />
+        <Ability
+          label={"Charisma"}
+          placeholder={"score"}
+          value={charisma}
+          onChange={setCharisma}
+        />
+        <Ability
+          label={"Dexterity"}
+          placeholder={"score"}
+          value={dexterity}
+          onChange={setDexterity}
+        />
+        <Ability
+          label={"Constitution"}
+          placeholder={"score"}
+          value={constitution}
+          onChange={setConstitution}
+        />
+        <Ability
+          label={"Intelligence"}
+          placeholder={"score"}
+          value={intelligence}
+          onChange={setIntelligence}
+        />
+        <Ability
+          label={"Wisdom"}
+          placeholder={"score"}
+          value={wisdom}
+          onChange={setWisdom}
+        />
 
         <Button
           onClickAction={onMainClick}
