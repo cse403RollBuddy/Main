@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import Button from "../Button";
+import {MainContainer} from "../CenteredBox";
+import React from "react";
 
 export const InputBox = styled.input`
   border: 1px solid #000;
@@ -10,20 +13,20 @@ export const InputBox = styled.input`
   align-items: left;
 `;
 
-export default function Ability({ label, type, placeholder,  value1, value2, onChange }) {
+export default function Ability({ label, type, placeholder, value, onChange, onClick }) {
   return (
     <label>
       {label}
       <InputBox
         type={type}
-        value={value1}
+        placeholder={placeholder}
+        value={value}
         onChange={onChange}
       />
-      <InputBox
-        type={type}
-        placeholder={placeholder}
-        value={value2}
-        onChange={onChange}
+      <Button
+        onClickAction={onClick}
+         buttonText="Roll Dice"
+         buttonColor="red"
       />
     </label>
   );

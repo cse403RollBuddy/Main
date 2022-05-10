@@ -6,6 +6,7 @@ import DropDownList from "../../components/DropDownList/index";
 import CharacterPageService from "./service";
 import { Nav, RollBuddyTitle } from "../../components/RollBuddyTitle";
 import { useNavigate } from "react-router-dom";
+import Ability from "../../components/Ability";
 
 export default function CharacterPage() {
   const history = useNavigate();
@@ -55,7 +56,7 @@ export default function CharacterPage() {
   return (
     <div>
       <Nav>
-        <h1 className="app-title">ROLL BUDDY</h1>
+        <h1 className="app-title">ROLLBUDDY</h1>
       </Nav>
       <MainContainer>
         <Input
@@ -84,61 +85,69 @@ export default function CharacterPage() {
           setSelectedOptions={setSelectedClass}
           list={classes}
         />
-        <Input
+        <Button buttonColor={"red"} buttonText={"Submit"} />
+        <Ability
           label={"strength score"}
           readonly={true}
           type={"text"}
           placeholder={"score"}
           value={strength}
           onChange={setStrength}
+          onClick={setStrength}
         />
-        <Input
+        <Ability
           label={"charisma score"}
           readonly={true}
           type={"text"}
           placeholder={"score"}
           value={charisma}
           onChange={setCharisma}
+          onClick={setCharisma}
         />
-        <Input
+        <Ability
           label={"dexterity score"}
           readonly={true}
           type={"text"}
           placeholder={"score"}
           value={dexterity}
           onChange={setDexterity}
+          onClick={setDexterity}
         />
-        <Input
+        <Ability
           label={"intelligence score"}
           readonly={true}
           type={"text"}
           placeholder={"score"}
           value={intelligence}
           onChange={setIntelligence}
+          onClick={setIntelligence}
         />
-        <Input
+        <Ability
           label={"wisdom score"}
           readonly={true}
           type={"text"}
           placeholder={"score"}
           value={wisdom}
           onChange={setWisdom}
+          onClick={setWisdom}
         />
-        <Input
+        <Ability
           label={"constitution score"}
           readonly={true}
           type={"text"}
           placeholder={"score"}
           value={constitution}
           onChange={setConstitution}
+          onClick={setConstitution}
         />
-        <Button buttonColor={"red"} buttonText={"Submit"} />
+
         <Button
           onClickAction={onMainClick}
           buttonText="Update and Play"
           buttonColor="blue"
         />
       </MainContainer>
+
     </div>
   );
 }
