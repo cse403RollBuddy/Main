@@ -58,9 +58,9 @@ public class SparkServer {
         get("/setbackground", (req, res) -> {
             String background = req.queryParams("background").toUpperCase();
             switch (background) {
-                case "ACOLYTE":  beingCreated.set_background(Backgrounds.ACOLYTE);
-                case "CRIMINAL": beingCreated.set_background(Backgrounds.CRIMINAL);
-                case "SOLDIER":  beingCreated.set_background(Backgrounds.SOLDIER);
+                case "ACOLYTE":  beingCreated.set_background(Backgrounds.ACOLYTE); break;
+                case "CRIMINAL": beingCreated.set_background(Backgrounds.CRIMINAL); break;
+                case "SOLDIER":  beingCreated.set_background(Backgrounds.SOLDIER); break;
             }
             return 0;
         });
