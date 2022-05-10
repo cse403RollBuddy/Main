@@ -503,6 +503,7 @@ public class Character {
             System.out.println(character);
         }
         System.out.println();
+        System.out.println(Dice.Roll(1, 20));
 
     }
 }
