@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 //import CORSFilter.java;
 //import ExampleDataTransfer.java;
+import java.util.Map;
 
 
 public class SparkServer {
@@ -124,5 +125,26 @@ public class SparkServer {
             return "Server successfully shutdown.";
         });
 
+        // saves character info to file
+        post("/save", (req, res) -> {
+            String character = req.queryParams("character").toUpperCase();
+            Map map = gson.fromJson(character, Map.class);
+            //Set info
+            beingCreated.set_name((String) map.get("name"));
+            beingCreated.set_race(race);
+            beingCreated.set_background(background);
+            beingCreated.set_class(c);
+            
+            //Set Ability Scores
+            beingCreated.set_strength(v);
+            beingCreated.set_charisma(v);
+            beingCreated.set_dexterity(v);
+            beingCreated.set_intelligence(v);
+            beingCreated.set_wisdom(v);
+            beingCreated.set_constitution(v);
+
+            Character.writeCharacterToFile(beingCreated);
+            return "Successfully written to file";
+        });
     }
 }
