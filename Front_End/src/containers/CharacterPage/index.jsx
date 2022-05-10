@@ -59,6 +59,9 @@ export default function CharacterPage() {
         <h1 className="app-title">ROLLBUDDY</h1>
       </Nav>
       <MainContainer>
+        <Nav>
+          <h1 className="app-title">ROLL BUDDY</h1>
+        </Nav>
         <Input
           placeholder={"Enter character name"}
           value={name}
@@ -147,7 +150,6 @@ export default function CharacterPage() {
           buttonColor="blue"
         />
       </MainContainer>
-
     </div>
   );
 }
