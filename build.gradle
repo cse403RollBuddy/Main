@@ -10,7 +10,7 @@ plugins {
 }
 
 application {
-    mainClass = 'Back_End.Character' /*'Back_End.SparkServer'*/
+    mainClass =  'Back_End.SparkServer'
 }
 
 repositories { 

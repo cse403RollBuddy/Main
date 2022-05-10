@@ -1,5 +1,6 @@
 package Back_End;
 import static spark.Spark.*;
+import com.google.gson.Gson;
 //import CORSFilter.java;
 //import ExampleDataTransfer.java;
 
@@ -8,11 +9,14 @@ public class SparkServer {
 
 
     public static void main (String[] args) {
+
+        Gson gson = new Gson();
+
         initExceptionHandler((e) -> System.out.println("Uh-oh"));
         CORSFilter corsFilter = new CORSFilter();
         corsFilter.apply();
 
-        get("/data", (req, res) -> {
+        Spark.get("/data", (req, res) -> {
             ExampleDataTransfer example = new ExampleDataTransfer();
             return example.getData();
         });
@@ -24,9 +28,8 @@ public class SparkServer {
                 "Hello: " + request.params(":name")
         );
 
-
         get("/background", (req, res) -> {
-            return "ACOLYTE, CRIMINAL, SOLDIER";
+            return gson.toJson("ACOLYTE, CRIMINAL, SOLDIER");
         });
 
         get("/classes", (req, res) -> {

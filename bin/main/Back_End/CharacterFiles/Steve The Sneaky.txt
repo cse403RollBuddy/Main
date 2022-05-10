@@ -1,8 +1,0 @@
-Steve The Sneaky
-ROGUE
-HALFLING
-CRIMINAL
-Level: 1
-10 16 13 5 6 3
-5/5
-Gold: 15
