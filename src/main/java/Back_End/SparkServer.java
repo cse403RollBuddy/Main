@@ -28,17 +28,17 @@ public class SparkServer {
                 "Hello: " + request.params(":name")
         );
 
-        get("/background", (req, res) -> {
-            return gson.toJson("ACOLYTE CRIMINAL SOLDIER");
-        });
+        get("/roll/:numDice/:faces", (req, res) ->
+                Dice.roll(Integer.parseInt(req.params(":numDice").trim()),
+                          Integer.parseInt(req.params(":faces").trim()))
+        );
 
-        get("/classes", (req, res) -> {
-            return gson.toJson("CLERIC FIGHTER ROGUE");
-        });
 
-        get("/races", (req, res) -> {
-            return gson.toJson("HUMAN ELF DWARF HALFLING");
-        });
+        get("/background", (req, res) -> gson.toJson("ACOLYTE, CRIMINAL, SOLDIER"));
+
+        get("/classes", (req, res) -> gson.toJson("CLERIC, FIGHTER, ROGUE"));
+
+        get("/races", (req, res) -> gson.toJson("HUMAN, ELF, DWARF, HALFLING"));
 
     }
 }
