@@ -3,6 +3,7 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 //import CORSFilter.java;
 //import ExampleDataTransfer.java;
 
@@ -37,6 +38,14 @@ public class SparkServer {
                 Dice.Roll(Integer.parseInt(req.params(":numDice").trim()),
                           Integer.parseInt(req.params(":faces").trim()))
         );
+
+        // rolls 4d6, drops the lowest, sums the result, and returns it
+        get("/creationroll", (req, res) -> {
+            List<Integer> result = Dice.Roll(4, 6);
+            result.sort(Integer::compareTo);
+            result.remove(0);
+            return result.stream().mapToInt(Integer::intValue).sum();
+        });
 
         // sets the character's name
         get("/create", (req, res) -> {
