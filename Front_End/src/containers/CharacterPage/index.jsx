@@ -35,10 +35,20 @@ export default function CharacterPage() {
     return CharacterPageService.getRaces();
   }
 
-  async function getBackground() {
-    return CharacterPageService.getBackground();
-  }
-
+  const getBackground = async () => {
+    await fetch("http://localhost:4567/background")
+      .then((response) => response.json())
+      .catch((e) => {
+        //   alert("background unavailable");
+        throw new Error("server unavailable");
+      })
+      .then((data) => {
+        setBackgrounds(data);
+      });
+  };
+  useEffect(()=>{
+    getBackground();
+  },[])
   async function getClasses() {
     return CharacterPageService.getClasses();
   }
@@ -50,6 +60,7 @@ export default function CharacterPage() {
   useEffect(() => {
     setRaces(getRaces());
     setBackgrounds(getBackground());
+    console.log(backgrounds);
     setClasses(getClasses());
   }, []);
 
