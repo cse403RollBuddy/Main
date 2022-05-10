@@ -14,32 +14,24 @@ export default function PlayPage() {
     e.preventDefault();
     history("/HomePage");
   };
-  const onDiceClick = (e) => {
-    e.preventDefault();
-  };
-
 
   return (
     <div>
       <Nav>
-        <h1 className="app-title">ROLL BUDDY</h1>
+        <h1 className="app-title">ROLLBUDDY</h1>
       </Nav>
       <MainContainer>
-        <Ability label={"Strength"} placeholder={"new score"} />
-        <Ability label={"Dexterity"} placeholder={"new score"} />
-        <Ability label={"Constitution"} placeholder={"new score"} />
-        <Ability label={"Intelligence"} placeholder={"new score"} />
-        <Ability label={"Wisdom"} placeholder={"new score"} />
+        <Ability label={"Strength"} placeholder={"score"} />
+        <Ability label={"Charisma"} placeholder={"score"} />
+        <Ability label={"Dexterity"} placeholder={"score"} />
+        <Ability label={"Constitution"} placeholder={"score"} />
+        <Ability label={"Intelligence"} placeholder={"score"} />
+        <Ability label={"Wisdom"} placeholder={"score"} />
 
         <Button
           onClickAction={onMainClick}
           buttonText="Update"
-          buttonColor="red"
-        />
-        <Button
-          onClickAction={onDiceClick}
-          buttonText="Roll Dice"
-          buttonColor="dice"
+          buttonColor="blue"
         />
       </MainContainer>
     </div>

@@ -9,12 +9,20 @@ export const InputBox = styled.input`
   box-sizing: border-box;
 `;
 
-export default function Input({ label, type, placeholder, value, onChange }) {
+export default function Input({
+  label,
+  type,
+  placeholder,
+  value,
+  onChange,
+  readonly,
+}) {
   return (
     <label>
       {label}
       <InputBox
         type={type}
+        readOnly={readonly}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

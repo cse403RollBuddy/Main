@@ -14,7 +14,7 @@ export default function StartPage() {
   return (
     <div>
       <Nav>
-         <h1 className="app-title">ROLL BUDDY</h1>
+         <h1 className="app-title">ROLLBUDDY</h1>
       </Nav>
       <MainContainer>
         <Button
