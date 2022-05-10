@@ -29,7 +29,7 @@ public class SparkServer {
         );
 
         get("/roll/:numDice/:faces", (req, res) ->
-                Dice.roll(Integer.parseInt(req.params(":numDice").trim()),
+                Dice.Roll(Integer.parseInt(req.params(":numDice").trim()),
                           Integer.parseInt(req.params(":faces").trim()))
         );
 
