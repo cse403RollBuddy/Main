@@ -125,7 +125,7 @@ public class SparkServer {
 
         // returns a list of the character names that live in the CharacterFiles directory
         get("/characters", (req, res) ->
-                Character.getCharNames()
+                gson.toJson(Character.getCharNames())
         );
 
         get("/select-character", (req, res) -> {

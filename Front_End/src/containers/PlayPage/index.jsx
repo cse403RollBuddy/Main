@@ -12,7 +12,7 @@ export default function PlayPage() {
   const history = useNavigate();
 
   const [characters, setCharacters] = useState([]);
-  const [selectedCharacter, setSelectedCharacter] = useState();
+  const [selectedCharacter, setSelectedCharacter] = useState("");
 
   const [strength, setStrength] = useState();
   const [dexterity, setDexterity] = useState();
@@ -29,34 +29,45 @@ export default function PlayPage() {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        console.log(data);
-        setCharacters(data.split(" "));
+        setCharacters(data);
       });
   }
 
-  async function getCharaterData(character) {
-    await fetch("http://localhost:4567/select-character?character=" + character)
-      .then((response) => response.json())
-      .catch((e) => {
-        throw new Error("server unavailable");
-      })
-      .then((data) => {
-        setCharisma(data.Charisma);
-        setWisdom(data.Wisdom);
-        setDexterity(data.Dexterity);
-        setStrength(data.Strength);
-        setIntelligence(data.Intelligence);
-        setConstitution(data.Constitution);
-      });
-  }
+  // async function getCharaterData(character) {
+  //   await fetch("http://localhost:4567/select-character?name=" + character)
+  //     .then((response) => response.json())
+  //     .catch((e) => {
+  //       throw new Error("server unavailable");
+  //     })
+  //     .then((data) => {
+  //       setCharisma(3);
+  //       setWisdom(18);
+  //       setDexterity(16);
+  //       setStrength(data.Strength);
+  //       setIntelligence(data.Intelligence);
+  //       setConstitution(data.Constitution);
+  //     });
+  // }
 
   useEffect(() => {
     getCharacters();
   }, []);
 
   useEffect(() => {
-    getCharaterData();
+    // getCharaterData();
+    setAbility();
   }, [selectedCharacter]);
+
+  function setAbility() {
+    if (selectedCharacter) {
+      setCharisma(16);
+      setWisdom(6);
+      setDexterity(13);
+      setStrength(10);
+      setIntelligence(5);
+      setConstitution(3);
+    }
+  }
 
   const onMainClick = (e) => {
     e.preventDefault();
@@ -73,8 +84,11 @@ export default function PlayPage() {
           label={"Characters"}
           value={selectedCharacter}
           maxMenuHeight={150}
-          onChange={setSelectedCharacter}
-          options={characters}
+          setSelectedOptions={setSelectedCharacter}
+          list={characters.map((name) => ({
+            value: name,
+            label: name,
+          }))}
           isMulti={false}
         />
         <Ability

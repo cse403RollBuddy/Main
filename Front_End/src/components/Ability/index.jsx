@@ -13,7 +13,6 @@ export const InputBox = styled.input`
   align-items: left;
 `;
 
-
 export default function Ability({
   label,
   type,
@@ -22,9 +21,6 @@ export default function Ability({
   onChange,
   onClick,
 }) {
-  // fetch here for dice roll "/roll/:numDice/:faces"
-  // 4 dies, 6 faces
-
   return (
     <label>
       {label}
@@ -33,10 +29,9 @@ export default function Ability({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        on
       />
       <Button
-        onClickAction={onClick} // on click would detch dice roll score.
+        onClickAction={onClick}
         buttonText="Roll Dice"
         buttonColor="red"
       />
