@@ -10,7 +10,7 @@ plugins {
 }
 
 application {
-    mainClass = 'Back_End.SparkServer'
+    mainClass =  'Back_End.SparkServer'
 }
 
 repositories { 
@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
     implementation "com.sparkjava:spark-core:2.9.3"
+    implementation "com.google.code.gson:gson:2.9.0"
     implementation 'org.slf4j:slf4j-simple:1.7.36'
     testImplementation 'junit:junit:4.13.2'
     //testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
