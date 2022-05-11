@@ -3,7 +3,9 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 //import CORSFilter.java;
@@ -14,14 +16,14 @@ import java.util.Map;
 public class SparkServer {
 
 
-    public static void main (String[] args) {
+    public static void main (String[] args) throws IOException {
 
         Gson gson = new Gson();
         Character beingCreated = new Character();
-
         initExceptionHandler((e) -> System.out.println("Uh-oh"));
         CORSFilter corsFilter = new CORSFilter();
         corsFilter.apply();
+        List<Character> charList = Character.createListOfCharacters(Character.getCharNames());
 
         get("/data", (req, res) -> {
             ExampleDataTransfer example = new ExampleDataTransfer();
@@ -124,25 +126,25 @@ public class SparkServer {
         });
 
         // returns a list of the character names that live in the CharacterFiles directory
-        get("/characters", (req, res) ->
-                gson.toJson(Character.getCharNames())
-        );
+        get("/characters", (req, res) -> {
+            List<String> chars = new ArrayList<>();
+            for (Character c : charList) {
+                chars.add(c.get_name());
+            }
+            return gson.toJson(chars);
+        });
 
         get("/select-character", (req, res) -> {
             String name = req.queryParams("name");
-            List<Character> chars = Character.createListOfCharacters(Character.getCharNames());
-            for (Character c : chars) {
+            for (Character c : charList) {
                 if (c.get_name().equals(name)) { return gson.toJson(c); }
             }
-            return new Character();  // if something went wrong, get an empty character!
+            return gson.toJson(new Character());  // if something went wrong, get an empty character!
         });
 
         // saves character info to file
         get("/new-character", (req, res) -> {
             Character.verifyDirectoryAndCharacterFiles();
-            System.out.println(req.queryParams("character"));
-            String character = req.queryParams("character");
-            System.out.println(character);
             JsonReader reader = new JsonReader(new StringReader(req.queryParams("character")));
             reader.setLenient(true);
             Map newCharInfo = gson.fromJson(reader, Map.class);
@@ -172,27 +174,10 @@ public class SparkServer {
             newChar.set_class(Classes.valueOf(char_class));
             newChar.set_background(Backgrounds.valueOf(background));
 
-            /*
-
-
-            //Set Ability Scores
-            beingCreated.set_strength((Integer) map.get("strength"));
-            beingCreated.set_charisma((Integer) map.get("charisma"));
-            beingCreated.set_dexterity((Integer) map.get("dexterity"));
-            beingCreated.set_intelligence((Integer) map.get("intelligence"));
-            beingCreated.set_wisdom((Integer) map.get("wisdom"));
-            beingCreated.set_constitution((Integer) map.get("constitution"));
-
-            //Set info
-            beingCreated.set_name((String) map.get("name"));
-            beingCreated.set_race(Races.valueOf((String) map.get("race")));
-            beingCreated.set_background(Backgrounds.valueOf((String) map.get("background")));
-            beingCreated.set_class(Classes.valueOf((String) map.get("class")));
-            */
             // write character
-
             Character.writeCharacterToFile(newChar);
-            return newCharInfo;
+            charList.add(newChar);
+            return gson.toJson(newCharInfo);
         });
     }
 }
