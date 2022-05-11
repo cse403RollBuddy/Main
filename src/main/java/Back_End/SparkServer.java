@@ -123,8 +123,19 @@ public class SparkServer {
             return "Server successfully shutdown.";
         });
 
+        // returns a list of the character names that live in the CharacterFiles directory
         get("/characters", (req, res) ->
-                Character.getCharNames());
+                Character.getCharNames()
+        );
+
+        get("/select-character", (req, res) -> {
+            String name = req.queryParams("name");
+            List<Character> chars = Character.createListOfCharacters(Character.getCharNames());
+            for (Character c : chars) {
+                if (c.get_name().equals(name)) { return gson.toJson(c); }
+            }
+            return new Character();  // if something went wrong, get an empty character!
+        });
 
         // saves character info to file
         get("/new-character", (req, res) -> {
