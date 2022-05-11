@@ -40,7 +40,6 @@ export default function CharacterPage() {
       wisdom: wisdom,
       charisma: charisma,
     };
-    console.log(character);
     submitCharacter(JSON.stringify(character));
     history("/PlayPage");
   };

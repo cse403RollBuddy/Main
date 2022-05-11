@@ -22,20 +22,41 @@ export default function PlayPage() {
   const [charisma, setCharisma] = useState();
   const [score, setScore] = useState(0);
 
-  async function getCharaters() {
+  async function getCharacters() {
     await fetch("http://localhost:4567/characters")
       .then((response) => response.json())
       .catch((e) => {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        setCharacters(data);
+        console.log(data);
+        setCharacters(data.split(" "));
+      });
+  }
+
+  async function getCharaterData(character) {
+    await fetch("http://localhost:4567/select-character?character=" + character)
+      .then((response) => response.json())
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then((data) => {
+        setCharisma(data.Charisma);
+        setWisdom(data.Wisdom);
+        setDexterity(data.Dexterity);
+        setStrength(data.Strength);
+        setIntelligence(data.Intelligence);
+        setConstitution(data.Constitution);
       });
   }
 
   useEffect(() => {
-    getCharaters();
-  });
+    getCharacters();
+  }, []);
+
+  useEffect(() => {
+    getCharaterData();
+  }, [selectedCharacter]);
 
   const onMainClick = (e) => {
     e.preventDefault();
