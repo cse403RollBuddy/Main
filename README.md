@@ -63,10 +63,15 @@ Main
   - you might run into react-scripts: command not found Error, then try install react-scripts with command:
   *npm i react-script*
 
-### Overall
+### Testing
+* From the main directory, run *./gradlew test* to test the current implementation against the test suite. This automatically builds the system as well if needed.
+
+### Running the system
 
 1. Ensure you have the correct system requirements for both Backend and Frontend
 2. From a terminal, clone the GitHub repo and enter the newly created directory
 3. In the overall directoy (i.e. ~/Main/), run *./gradlew build* then *./gradlew run*
 4. In another terminal, navigate to the Front End directory (i.e. ~/Main/Front_End/) and run *npm start*
 5. A webstie should pop up in your default bowser, enjoy Roll Buddy!
+
+
