@@ -1,0 +1,8 @@
+Hunter
+CLERIC
+ELF
+ACOLYTE
+Level: 1
+11 16 17 17 12 11
+5/5
+Gold: 15
