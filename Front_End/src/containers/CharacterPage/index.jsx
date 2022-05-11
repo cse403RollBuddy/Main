@@ -41,7 +41,7 @@ export default function CharacterPage() {
       charisma: charisma,
     };
     console.log(character);
-    submitCharacter(character);
+    submitCharacter(JSON.stringify(character));
     history("/PlayPage");
   };
 

@@ -1,7 +1,9 @@
 package Back_End;
 import static spark.Spark.*;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
 //import CORSFilter.java;
@@ -122,10 +124,42 @@ public class SparkServer {
         });
 
         // saves character info to file
-        post("/save", (req, res) -> {
+        get("/new-character", (req, res) -> {
             Character.verifyDirectoryAndCharacterFiles();
-            String character = req.queryParams("character").toUpperCase();
-            Map map = gson.fromJson(character, Map.class);
+            System.out.println(req.queryParams("character"));
+            String character = req.queryParams("character");
+            System.out.println(character);
+            JsonReader reader = new JsonReader(new StringReader(req.queryParams("character")));
+            reader.setLenient(true);
+            Map newCharInfo = gson.fromJson(reader, Map.class);
+
+            System.out.println(newCharInfo);
+
+            String name = (String) newCharInfo.get("name");
+            String race = (String) newCharInfo.get("race");
+            String background = (String) newCharInfo.get("background");
+            String char_class = (String) newCharInfo.get("class");
+            int strength = (int) (double) newCharInfo.get("strength");
+            int dexterity = (int) (double) newCharInfo.get("dexterity");
+            int constitution = (int) (double) newCharInfo.get("constitution");
+            int intelligence = (int) (double) newCharInfo.get("intelligence");
+            int wisdom = (int) (double) newCharInfo.get("wisdom");
+            int charisma = (int) (double) newCharInfo.get("charisma");
+
+            Character newChar = new Character();
+            newChar.set_name(name);
+            newChar.set_strength(strength);
+            newChar.set_dexterity(dexterity);
+            newChar.set_intelligence(intelligence);
+            newChar.set_wisdom(wisdom);
+            newChar.set_constitution(constitution);
+            newChar.set_charisma(charisma);
+            newChar.set_race(Races.valueOf(race));
+            newChar.set_class(Classes.valueOf(char_class));
+            newChar.set_background(Backgrounds.valueOf(background));
+
+            /*
+
 
             //Set Ability Scores
             beingCreated.set_strength((Integer) map.get("strength"));
@@ -140,10 +174,11 @@ public class SparkServer {
             beingCreated.set_race(Races.valueOf((String) map.get("race")));
             beingCreated.set_background(Backgrounds.valueOf((String) map.get("background")));
             beingCreated.set_class(Classes.valueOf((String) map.get("class")));
-
+            */
             // write character
-            Character.writeCharacterToFile(beingCreated);
-            return "Successfully written to file";
+
+            Character.writeCharacterToFile(newChar);
+            return newCharInfo;
         });
     }
 }
