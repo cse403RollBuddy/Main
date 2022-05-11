@@ -389,7 +389,8 @@ public class Character {
     public static List<Character> createListOfCharacters(List<String> characterStrings) throws IOException {
         List<Character> characters = new ArrayList<>();
         for (String characterFile : characterStrings) {
-            String charInfo = readCharacterFromFile(Paths.get("./src/main/java/Back_End/CharacterFiles/" + characterFile));
+            String charInfo = readCharacterFromFile(Paths.get("./src/main/java/Back_End/CharacterFiles/"
+                    + characterFile + ".txt"));
             Character c = createCharacterFromString(charInfo);
             characters.add(c);
         }
@@ -425,6 +426,7 @@ public class Character {
         List<String> charNames = new ArrayList<>();
         for (final File charFile : Objects.requireNonNull(new File("./src/main/java/Back_End/CharacterFiles/").listFiles())) {
             String fileName = charFile.toString().substring(charFile.toString().lastIndexOf('\\') + 1);
+            fileName = fileName.substring(0, fileName.length()-4);  //assumes every file in the directory ends in .txt
             charNames.add(fileName);
             // System.out.println(fileName);
         }

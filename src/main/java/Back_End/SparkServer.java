@@ -123,6 +123,9 @@ public class SparkServer {
             return "Server successfully shutdown.";
         });
 
+        get("/characters", (req, res) ->
+                Character.getCharNames());
+
         // saves character info to file
         get("/new-character", (req, res) -> {
             Character.verifyDirectoryAndCharacterFiles();
