@@ -33,41 +33,43 @@ export default function PlayPage() {
       });
   }
 
-  // async function getCharaterData(character) {
-  //   await fetch("http://localhost:4567/select-character?name=" + character)
-  //     .then((response) => response.json())
-  //     .catch((e) => {
-  //       throw new Error("server unavailable");
-  //     })
-  //     .then((data) => {
-  //       setCharisma(3);
-  //       setWisdom(18);
-  //       setDexterity(16);
-  //       setStrength(data.Strength);
-  //       setIntelligence(data.Intelligence);
-  //       setConstitution(data.Constitution);
-  //     });
-  // }
+  async function getCharaterData() {
+    if (selectedCharacter) {
+      await fetch("http://localhost:4567/select-character?name=" + selectedCharacter.value)
+          .then((response) => response.json())
+          .catch((e) => {
+            throw new Error("server unavailable");
+          })
+          .then((data) => {
+            setCharisma(data.charisma);
+            setWisdom(data.wisdom);
+            setDexterity(data.dexterity);
+            setStrength(data.strength);
+            setIntelligence(data.intelligence);
+            setConstitution(data.constitution);
+          });
+    }
+  }
 
   useEffect(() => {
     getCharacters();
   }, []);
 
   useEffect(() => {
-    // getCharaterData();
-    setAbility();
+    getCharaterData();
+   // setAbility();
   }, [selectedCharacter]);
 
-  function setAbility() {
-    if (selectedCharacter) {
-      setCharisma(16);
-      setWisdom(6);
-      setDexterity(13);
-      setStrength(10);
-      setIntelligence(5);
-      setConstitution(3);
-    }
-  }
+  // function setAbility() {
+  //   if (selectedCharacter) {
+  //     setCharisma(16);
+  //     setWisdom(6);
+  //     setDexterity(13);
+  //     setStrength(10);
+  //     setIntelligence(5);
+  //     setConstitution(3);
+  //   }
+  // }
 
   const onMainClick = (e) => {
     e.preventDefault();
@@ -91,37 +93,37 @@ export default function PlayPage() {
           }))}
           isMulti={false}
         />
-        <Ability
+        <Input
           label={"Strength"}
           placeholder={"score"}
           value={strength}
           onChange={setStrength}
         />
-        <Ability
+        <Input
           label={"Charisma"}
           placeholder={"score"}
           value={charisma}
           onChange={setCharisma}
         />
-        <Ability
+        <Input
           label={"Dexterity"}
           placeholder={"score"}
           value={dexterity}
           onChange={setDexterity}
         />
-        <Ability
+        <Input
           label={"Constitution"}
           placeholder={"score"}
           value={constitution}
           onChange={setConstitution}
         />
-        <Ability
+        <Input
           label={"Intelligence"}
           placeholder={"score"}
           value={intelligence}
           onChange={setIntelligence}
         />
-        <Ability
+        <Input
           label={"Wisdom"}
           placeholder={"score"}
           value={wisdom}
