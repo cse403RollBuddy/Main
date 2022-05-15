@@ -35,19 +35,6 @@ public class SparkServer {
                 "Hello: " + request.params(":name")
         );
 
-<<<<<<< HEAD
-        get("/roll/:numDice/:faces", (req, res) ->
-                Dice.roll(Integer.parseInt(req.params(":numDice").trim()),
-                          Integer.parseInt(req.params(":faces").trim()))
-        );
-
-
-        get("/background", (req, res) -> "ACOLYTE, CRIMINAL, SOLDIER");
-
-        get("/classes", (req, res) -> "CLERIC, FIGHTER, ROGUE");
-
-        get("/races", (req, res) -> "HUMAN, ELF, DWARF, HALFLING");
-=======
         // returns the result of rolling numDice dice, each of which is a faces-sided die
         // e.g. /roll/4/6 returns a list which contains 4 random values from 1-6
         get("/roll/:numDice/:faces", (req, res) ->
@@ -61,6 +48,24 @@ public class SparkServer {
             result.sort(Integer::compareTo);
             result.remove(0);
             return result.stream().mapToInt(Integer::intValue).sum();
+        });
+
+        // Rolls a d20 and adds the characters profiency to it
+        // USES beingCreated AS THE CURRENT CHARACTER, IS THAT CORRECT?
+        get("/select-character", (req, res) -> {
+            String ability = req.queryParams("ability");
+            int proficiency;
+            switch(ability) {
+                case "charisma" : proficiency = beingCreated.get_charisma();
+                case "constitution" : proficiency = beingCreated.get_constitution();
+                case "dexterity" : proficiency = beingCreated.get_dexterity();
+                case "intelligence" : proficiency = beingCreated.get_intelligence();
+                case "strength" : proficiency = beingCreated.get_strength();
+                case "wisdom" : proficiency = beingCreated.get_wisdom();
+
+                default: proficiency = 0;
+            }
+            return Dice.RollAC(proficiency);
         });
 
         // sets the character's name
@@ -149,7 +154,6 @@ public class SparkServer {
             }
             return new Character();  // if something went wrong, get an empty character!
         });
->>>>>>> main
 
         // saves character info to file
         get("/new-character", (req, res) -> {

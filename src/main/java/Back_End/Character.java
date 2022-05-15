@@ -505,10 +505,7 @@ public class Character {
             System.out.println(character);
         }
         System.out.println();
-<<<<<<< HEAD
-=======
         System.out.println(Dice.Roll(1, 20));
 
->>>>>>> main
     }
 }
