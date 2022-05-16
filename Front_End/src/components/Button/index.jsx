@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-
+/**
+ * This is a basic red button component
+ * Used for dice rolling and navigation between pages
+ */
 const RedButtonStyle = styled.button`
   color: #fff !important;
   text-transform: uppercase;
@@ -22,6 +25,11 @@ const RedButtonStyle = styled.button`
     transition: all 0.4s ease 0s;
     }
   `;
+
+/**
+ * This is a basic blue button component
+ * Used for updating scores and character information
+ */
 const BlueButtonStyle = styled.button`
   color: #Fff !important;
   text-transform: uppercase;
@@ -43,6 +51,11 @@ const BlueButtonStyle = styled.button`
     transition: all 0.4s ease 0s;
     }
   `;
+
+/**
+ * This is a dice button component
+ * Used for rolling dice and obtainin scores
+ */
 const DiceButtonStyle = styled.button`
   color: #fff !important;
   text-transform: uppercase;
@@ -76,8 +89,8 @@ export default function Button({ onClickAction, buttonText, buttonColor }) {
     );
   } else if (buttonColor === "dice") {
     return (
-        <DiceButtonStyle onClick={onClickAction}>{buttonText}</DiceButtonStyle>
-      );
+      <DiceButtonStyle onClick={onClickAction}>{buttonText}</DiceButtonStyle>
+    );
   }
   return <button onClick={onClickAction}>{buttonText}</button>;
 }
