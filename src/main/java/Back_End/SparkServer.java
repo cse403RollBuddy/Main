@@ -65,7 +65,7 @@ public class SparkServer {
 
                 default: proficiency = 0;
             }
-            return Dice.RollAC(proficiency);
+            return Dice.RollAC((proficiency / 2) - 5);
         });
 
         // sets the character's name
