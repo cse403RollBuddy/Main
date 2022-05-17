@@ -52,7 +52,7 @@ public class SparkServer {
 
         // Rolls a d20 and adds the characters profiency to it
         // USES beingCreated AS THE CURRENT CHARACTER, IS THAT CORRECT?
-        get("/select-character", (req, res) -> {
+        get("/abilityroll", (req, res) -> {
             String ability = req.queryParams("ability");
             int proficiency;
             switch(ability) {
