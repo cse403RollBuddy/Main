@@ -19,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "gradle": "../run_backend.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clear-snapshots": "npm run test -- -u"

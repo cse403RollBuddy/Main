@@ -1,5 +1,5 @@
 const getRaces = async () => {
-  await fetch("http://localhost:4567/races")
+  const fetchedData = await fetch("http://localhost:4567/races")
     .then((response) => response.json())
     .catch((e) => {
       //   alert("races unavailable");
@@ -8,10 +8,11 @@ const getRaces = async () => {
     .then((data) => {
       return data;
     });
+  return fetchedData;
 };
 
 const getBackground = async () => {
-  await fetch("http://localhost:4567/background")
+  const fetchedData = await fetch("http://localhost:4567/background")
     .then((response) => response.json())
     .catch((e) => {
       //   alert("background unavailable");
@@ -20,10 +21,11 @@ const getBackground = async () => {
     .then((data) => {
       return data;
     });
+  return fetchedData;
 };
 
 const getClasses = async () => {
-  await fetch("http://localhost:4567/classes")
+  const fetchedData = await fetch("http://localhost:4567/classes")
     .then((response) => response.json())
     .catch((e) => {
       //   alert("levels unavailable");
@@ -32,71 +34,59 @@ const getClasses = async () => {
     .then((data) => {
       return data;
     });
+  return fetchedData;
 };
 
-const getAbilityScores = async (race) => {
-  const ability = {
-    strength: "",
-    charisma: "",
-    dexterity: "",
-    intelligence: "",
-    wisdom: "",
-    constitution: "",
-  };
-  await fetch(`http://localhost:4567/${race}-strength`)
+const getSelectedChar = async (selectedChar) => {
+  const fetchedData = await fetch(
+    "http://localhost:4567/select-character?name=" + selectedChar
+  )
     .then((response) => response.json())
     .catch((e) => {
       throw new Error("server unavailable");
     })
     .then((data) => {
-      ability.strength = data;
+      return data;
     });
+  return fetchedData;
+};
 
-  await fetch(`http://localhost:4567/${race}-charisma`)
-    .then((response) => response.json())
-    .catch((e) => {
-      throw new Error("server unavailable");
-    })
-    .then((data) => {
-      ability.charisma = data;
-    });
+const getAbilityScores = async (selectedRace) => {
+  if (selectedRace) {
+    const fetchedData = await fetch(
+      "http://localhost:4567/ability?race=" + selectedRace
+    )
+      .then((response) => response.json())
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then((data) => {
+        return data;
+      });
+    return fetchedData;
+  }
+  return null;
+};
 
-  await fetch(`http://localhost:4567/${race}-dexterity`)
+const getScore = async () => {
+  const fetchedData = await fetch("http://localhost:4567/creationroll")
     .then((response) => response.json())
     .catch((e) => {
+      //   alert("races unavailable");
       throw new Error("server unavailable");
     })
     .then((data) => {
-      ability.dexterity = data;
+      return data;
     });
+  return fetchedData;
+};
 
-  await fetch(`http://localhost:4567/${race}-intelligence`)
+const submitCharacter = async (char) => {
+  await fetch("http://localhost:4567/new-character?character=" + char)
     .then((response) => response.json())
     .catch((e) => {
       throw new Error("server unavailable");
-    })
-    .then((data) => {
-      ability.intelligence = data;
     });
-
-  await fetch(`http://localhost:4567/${race}-wisdom`)
-    .then((response) => response.json())
-    .catch((e) => {
-      throw new Error("server unavailable");
-    })
-    .then((data) => {
-      ability.wisdom = data;
-    });
-
-  await fetch(`http://localhost:4567/${race}-constitution`)
-    .then((response) => response.json())
-    .catch((e) => {
-      throw new Error("server unavailable");
-    })
-    .then((data) => {
-      ability.constitution = data;
-    });
-  return ability;
 };
 
 const CharacterPageService = {
@@ -104,5 +94,9 @@ const CharacterPageService = {
   getBackground,
   getClasses,
   getAbilityScores,
+  getSelectedChar,
+  getScore,
+  submitCharacter,
 };
+
 export default CharacterPageService;
