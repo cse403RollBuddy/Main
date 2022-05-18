@@ -14,4 +14,10 @@ public class Dice {
         }
         return values;
     }
+
+    public static int RollAC(int proficiency) {
+        Random rand = new Random();
+        int roll = rand.nextInt(20) + 1;
+        return roll + proficiency;
+    }
 }

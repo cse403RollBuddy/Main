@@ -52,6 +52,24 @@ public class SparkServer {
             return result.stream().mapToInt(Integer::intValue).sum();
         });
 
+        // Rolls a d20 and adds the characters profiency to it
+        // USES beingCreated AS THE CURRENT CHARACTER, IS THAT CORRECT?
+        get("/abilityroll", (req, res) -> {
+            String ability = req.queryParams("ability");
+            int proficiency;
+            switch(ability) {
+                case "charisma" : proficiency = beingCreated.get_charisma();
+                case "constitution" : proficiency = beingCreated.get_constitution();
+                case "dexterity" : proficiency = beingCreated.get_dexterity();
+                case "intelligence" : proficiency = beingCreated.get_intelligence();
+                case "strength" : proficiency = beingCreated.get_strength();
+                case "wisdom" : proficiency = beingCreated.get_wisdom();
+
+                default: proficiency = 0;
+            }
+            return Dice.RollAC((proficiency / 2) - 5);
+        });
+
         // sets the character's name
         get("/create", (req, res) -> {
                     String param = req.queryParams("name");
