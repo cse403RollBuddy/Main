@@ -253,10 +253,6 @@ public class Character {
         return this.charisma;
     }
 
-    /**
-     * It's toString, y'all! See the specification for overriding this method in
-     * the documentation for the Object class.
-     */
     @Override
     public String toString() {
         return
@@ -276,23 +272,34 @@ public class Character {
 
     // static methods
 
-    /**
-     * Returns the contents of the character file at Path path as a String
-     *
-     * @param path - the filepath to the character file as a Path object
-     * @return - a String containing the text in the file at filepath path
-     * @throws IOException - if the file cannot be read for some reason (e.g., permissions/existence)
-     */
+    // reads in character information
+    public static String[] readCharacterFiles() {
+        /* NOT YET IMPLEMENTED
+
+        // first count how many character files are in the directory and store their names
+        verifyDirectoryAndCharacterFiles();
+        int fileCount = Objects.requireNonNull(new File("./src/main/java/Back_End/CharacterFiles/")
+                .list()).length;
+        // next, create an array of Strings, each of which will represent a single character file's data
+        String[] characterStrings = new String[fileCount];
+        // iterate over the array of Strings, reading each file into a location in the array at each step
+        int i = 0;
+        while (i < fileCount) {
+
+        }
+        // return the array of Strings
+        return characterStrings;
+        */
+        throw new RuntimeException("Not Yet Implemented!");
+    }
+
+    // returns the contents of character file at filepath path as one big long string
     public static String readCharacterFromFile(Path path) throws IOException {
         return Files.readString(path, StandardCharsets.US_ASCII);
     }
 
-    /**
-     * Writes character c's data to a new text file at .../Main/src/main/java/Back_End/CharacterFiles/(c.name).txt,
-     * unless that file already exists, in which case the data in the file is overwritten.
-     *
-     * @param c - the Character object whose data will be written to file
-     */
+    // writes Character c's data to a new text file in .../Main/src/main/java/Back_End/CharacterFiles/<c.name>.txt,
+    // unless the file already exists, in which case it overwrites the data in the file
     public static void writeCharacterToFile(Character c) {
         String fileName = c.n + ".txt";
         Path newFilePath = Paths.get("./src/main/java/Back_End/CharacterFiles/" + fileName);
@@ -333,14 +340,8 @@ public class Character {
 
     }
 
-    /**
-     * Takes a String of character data and returns a Character object if the String is
-     * well-formed according to a specified file-format (see Steve The Sneaky.txt for an example).
-     * NOTE: this method currently has no error-checking whatsoever, so make sure the data in
-     * the String follows the specified format or else suffer...
-     * @param s - the String of character data
-     * @return - a newly created Character object
-     */
+    // takes a String of character data and returns a Character if the String is well-formed
+    // according to a specified format
     public static Character createCharacterFromString(String s) {
         Character newChar = new Character();
         List<String> charInfo = new ArrayList<>(List.of(s.split("\\R")));
@@ -383,18 +384,8 @@ public class Character {
         return newChar;
     }
 
-    /**
-     * Takes a list of Strings -- where each String should correspond to the name
-     * of a character file in .../Main/src/main/java/Back_End/CharacterFiles -- and
-     * returns a List of Characters corresponding to the data in the files.
-     *
-     * @param characterStrings - the List of Strings where each represents a file stored
-     *                         in the specified location (e.g., "Steve The Sneaky"
-     *                         represents the file "Steve The Sneaky.txt"
-     * @return - a List of Characters corresponding to the files in the input list
-     * @throws IOException - if there is any problem reading the files corresponding
-     * to the Strings in the input list
-     */
+    // takes a List of Strings and returns a List of Characters, one for each
+    // of the .txt files specified by the names in the input list
     public static List<Character> createListOfCharacters(List<String> characterStrings) throws IOException {
         List<Character> characters = new ArrayList<>();
         for (String characterFile : characterStrings) {
@@ -406,13 +397,8 @@ public class Character {
         return characters;
     }
 
-    /**
-     * Verifies that the directory where character files should live (currently
-     * .../Main/src/main/java/Back_End/CharacterFiles/) actually exists; if it
-     * doesn't exist, this method creates it. This method is run immediately
-     * upon server initialization in SparkServer.java.
-     *
-     */
+    // for now, just verifies that the directory where we're going to look for character files
+    // already exists
     public static void verifyDirectoryAndCharacterFiles() {
         Path p = Paths.get("./src/main/java/Back_End/CharacterFiles/");
         System.out.println("Verifying that directory for character files exists...");
@@ -433,14 +419,8 @@ public class Character {
         }
     }
 
-    /**
-     * Returns a list of Strings where each entry represents the name of a file
-     * corresponding to a character whose data is stored on disk at
-     * .../Main/src/java/Back_End/CharacterFiles/
-     *
-     * @return - a list of Strings extracted from the filenames in the
-     * directory
-     */
+    // returns a List of Strings where each entry represents the name
+    // of a file corresponding to a character whose data is stored on disk
     public static List<String> getCharNames() {
         verifyDirectoryAndCharacterFiles();
         List<String> charNames = new ArrayList<>();
