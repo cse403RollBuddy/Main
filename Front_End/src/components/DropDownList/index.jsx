@@ -4,6 +4,9 @@ import makeAnimated from "react-select/animated";
 
 const animatedComponents = makeAnimated();
 
+/**
+ * This is basic  dropdown list component
+ */
 export default function ListDropDown({
   label,
   list,
