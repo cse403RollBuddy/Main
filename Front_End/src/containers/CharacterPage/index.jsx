@@ -7,6 +7,7 @@ import { Nav, RollBuddyTitle } from "../../components/RollBuddyTitle";
 import CharacterPageService from "./service";
 import { useNavigate } from "react-router-dom";
 import Ability from "../../components/Ability";
+
 /**
  * This is the Character Page where user can crate a character
  * after filling out character name, race, class, background
@@ -175,11 +176,9 @@ export default function CharacterPage() {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        data = data.replace(/,/g, "");
-        setClasses(data.split(" "));
+        return setClasses(data.split(" "));
       });
   }
-
   /**
    * Obtain ability scores based on selected race
    * */
