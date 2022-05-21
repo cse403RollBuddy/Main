@@ -144,7 +144,7 @@ export default function PlayPage() {
           <Input label="Race" value={charData.race} />
           <Input label="Class" value={charData.classtype} />
           <Input label="Class" value={charData.background} />
-          <Input label="Class" value={charData.level} />
+          <Input label="Level" value={charData.level} />
         </HorizontalBox>
         <Input label={"Strength"} value={charData.strength} />
         <Input label={"Charisma"} value={charData.charisma} />
