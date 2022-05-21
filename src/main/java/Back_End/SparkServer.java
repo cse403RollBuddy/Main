@@ -65,19 +65,21 @@ public class SparkServer {
         // Rolls a d20 and adds the characters profiency to it
         // USES beingCreated AS THE CURRENT CHARACTER, IS THAT CORRECT?
         get("/abilityroll", (req, res) -> {
+            //Get second & thrid parameters first since they are quickest.
             String ability = req.queryParams("ability");
-            int proficiency;
-            switch(ability) {
-                case "charisma" : proficiency = beingCreated.get_charisma();
-                case "constitution" : proficiency = beingCreated.get_constitution();
-                case "dexterity" : proficiency = beingCreated.get_dexterity();
-                case "intelligence" : proficiency = beingCreated.get_intelligence();
-                case "strength" : proficiency = beingCreated.get_strength();
-                case "wisdom" : proficiency = beingCreated.get_wisdom();
+            String type = req.queryParams("roll-type");
 
-                default: proficiency = 0;
+            //Get first parameter, and find character
+            //If DNE character is default constructed
+            String name = req.queryParams("name");
+            Character charToRoll = new Character();
+            List<Character> chars = Character.createListOfCharacters(Character.getCharNames());
+            for (Character c : chars) {
+                if (c.get_name().equals(name)) { charToRoll = c; }
             }
-            return Dice.RollAC((proficiency / 2) - 5);
+            
+            //Call Roll AC with updated parameters
+            return gson.toJson(Dice.RollAC(charToRoll, ability, type));
         });
 
         // sets the character's name
