@@ -33,6 +33,8 @@ public class Dice {
 
     public static Map<String, Integer> RollAC(Character currChar, String ability, String type) {
         
+        if (ability == null || type == null) {return null;}
+
         Map<String, Integer> roll_data = new HashMap<>();
 
         //Make our rolls
