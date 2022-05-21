@@ -4,6 +4,7 @@ import { MainContainer } from "../../components/CenteredBox";
 import Input from "../../components/Input/index";
 import DropDownList from "../../components/DropDownList/index";
 import { Nav, RollBuddyTitle } from "../../components/RollBuddyTitle";
+import CharacterPageService from "./service";
 import { useNavigate } from "react-router-dom";
 import Ability from "../../components/Ability";
 /**

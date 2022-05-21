@@ -39,6 +39,23 @@ export default function PlayPage() {
   const [score, setScore] = useState(0);
 
   /**
+   * Navigate to HomePage
+   */
+  const onMainClick = (e) => {
+    e.preventDefault();
+    history("/HomePage");
+  };
+
+  useEffect(() => {
+    getCharacters();
+  }, []);
+
+  useEffect(() => {
+    getCharacterData();
+    // setAbility();
+  }, [selectedCharacter]);
+
+  /**
   * Obtain all saved characters from the server
   * */
   async function getCharacters() {
@@ -70,22 +87,6 @@ export default function PlayPage() {
     }
   }
 
-  useEffect(() => {
-    getCharacters();
-  }, []);
-
-  useEffect(() => {
-    getCharacterData();
-   // setAbility();
-  }, [selectedCharacter]);
-
-  /**
-   * Navigate to HomePage
-   */
-  const onMainClick = (e) => {
-    e.preventDefault();
-    history("/HomePage");
-  };
 
   /* List all the abilities as input box now, consider to use a form component later */
   return (
