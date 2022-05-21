@@ -47,7 +47,7 @@ class JUnit5ExampleTest {
     }
 
     //Test that proficiency establishes a "lower bound"
-    @Test
+    /*@Test
     void testRollAC () {
         int proficiency = 0;
         int tests = 10;
@@ -55,5 +55,5 @@ class JUnit5ExampleTest {
             int roll = Dice.RollAC(proficiency);
             assertTrue((proficiency < roll && roll <= (20 + proficiency)));
         }
-    }
+    } */
 }
