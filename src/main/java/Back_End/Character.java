@@ -11,10 +11,10 @@ import java.util.Objects;
 
 public class Character {
 
-    private String n = null;
-    private Races r = null;
-    private Backgrounds b = null;
-    private Classes c = null;
+    private String name = null;
+    private Races race = null;
+    private Backgrounds background = null;
+    private Classes character = null;
 
     private int max_health = 0;
     private int current_health = 0;
@@ -38,49 +38,49 @@ public class Character {
     // setters
     // assuming we can get enums as arguments from front end, will change if that's not the case
     public void set_name(String name) {
-        this.n = name;
+        this.name = name;
     }
 
     public void set_race(Races race) {
-        if (this.r != null) {
-            if (this.r == Races.HUMAN) {
+        if (this.race != null) {
+            if (this.race == Races.HUMAN) {
                 this.strength -= 1;
                 this.constitution -= 1;
                 this.dexterity -= 1;
                 this.intelligence -= 1;
                 this.wisdom -= 1;
                 this.charisma -= 1;
-            } else if (this.r == Races.ELF) {
+            } else if (this.race == Races.ELF) {
                 this.dexterity -= 2;
                 this.wisdom -= 1;
                 // proficient in perception
-            } else if (this.r == Races.DWARF) {
+            } else if (this.race == Races.DWARF) {
                 this.constitution -= 2;
                 this.strength -= 2;
                 // double proficient in history, stonework origin
-            } else if (this.r == Races.HALFLING) {
+            } else if (this.race == Races.HALFLING) {
                 this.dexterity -= 2;
                 this.constitution -= 1;
                 // saving throw stuff
             }
         }
-        this.r = race;
-        if (this.r == Races.HUMAN) {
+        this.race = race;
+        if (this.race == Races.HUMAN) {
             this.strength += 1;
             this.constitution += 1;
             this.dexterity += 1;
             this.intelligence += 1;
             this.wisdom += 1;
             this.charisma += 1;
-        } else if (this.r == Races.ELF) {
+        } else if (this.race == Races.ELF) {
             this.dexterity += 2;
             this.wisdom += 1;
             // proficient in perception
-        } else if (this.r == Races.DWARF) {
+        } else if (this.race == Races.DWARF) {
             this.constitution += 2;
             this.strength += 2;
             // double proficient in history, stonework origin
-        } else if (this.r == Races.HALFLING) {
+        } else if (this.race == Races.HALFLING) {
             this.dexterity += 2;
             this.constitution += 1;
             // saving throw stuff
@@ -88,46 +88,46 @@ public class Character {
     }
 
     public void set_background(Backgrounds background) {
-        if (this.b != null) {
-            if (this.b == Backgrounds.ACOLYTE) {
+        if (this.background != null) {
+            if (this.background == Backgrounds.ACOLYTE) {
                 // proficient in insight, religion
                 this.gold_coins -= 15;
-            } else if (this.b == Backgrounds.CRIMINAL) {
+            } else if (this.background == Backgrounds.CRIMINAL) {
                 // proficient in deception, stealth
                 this.gold_coins -= 15;
-            } else if (this.b == Backgrounds.SOLDIER) {
+            } else if (this.background == Backgrounds.SOLDIER) {
                 // proficient in athletics, intimidation
                 this.gold_coins -= 10;
             }
         }
-        this.b = background;
-        if (this.b == Backgrounds.ACOLYTE) {
+        this.background = background;
+        if (this.background == Backgrounds.ACOLYTE) {
             // proficient in insight, religion
             this.gold_coins += 15;
-        } else if (this.b == Backgrounds.CRIMINAL) {
+        } else if (this.background == Backgrounds.CRIMINAL) {
             // proficient in deception, stealth
             this.gold_coins += 15;
-        } else if (this.b == Backgrounds.SOLDIER) {
+        } else if (this.background == Backgrounds.SOLDIER) {
             // proficient in athletics, intimidation
             this.gold_coins += 10;
         }
     }
 
     public void set_class(Classes c) {
-        if (this.c != null) {
-            if (this.c == Classes.CLERIC) {
+        if (this.character != null) {
+            if (this.character == Classes.CLERIC) {
                 // set max health with 1d8 OR:
                 this.max_health -= 5;
                 this.current_health -= 5;
                 // saving throws wisdom, charisma
                 // choose 2 skill proficiency: history, insight, medicine, persuasion, religion
-            } else if (this.c == Classes.FIGHTER) {
+            } else if (this.character == Classes.FIGHTER) {
                 // set max health with 1d10 OR:
                 this.max_health -= 6;
                 this.current_health -= 6;
                 // saving throws strength, constitution
                 // choose 2 skill proficiency: acrobatics, animal handling, athletics, history, insight, intimidation, perception, survival
-            } else if (this.c == Classes.ROGUE) {
+            } else if (this.character == Classes.ROGUE) {
                 // set max health with 1d8 OR:
                 this.max_health -= 5;
                 this.current_health -= 6;
@@ -135,20 +135,20 @@ public class Character {
                 // choose 4 skill proficiency: Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, Stealth
             }
         }
-        this.c = c;
-        if (this.c == Classes.CLERIC) {
+        this.character = c;
+        if (this.character == Classes.CLERIC) {
             // set max health with 1d8 OR:
             this.max_health += 5;
             this.current_health += 5;
             // saving throws wisdom, charisma
             // choose 2 skill proficiency: history, insight, medicine, persuasion, religion
-        } else if (this.c == Classes.FIGHTER) {
+        } else if (this.character == Classes.FIGHTER) {
             // set max health with 1d10 OR:
             this.max_health += 6;
             this.current_health += 6;
             // saving throws strength, constitution
             // choose 2 skill proficiency: acrobatics, animal handling, athletics, history, insight, intimidation, perception, survival
-        } else if (this.c == Classes.ROGUE) {
+        } else if (this.character == Classes.ROGUE) {
             // set max health with 1d8 OR:
             this.max_health += 5;
             this.current_health += 5;
@@ -202,19 +202,19 @@ public class Character {
 
     // getters
     public String get_name() {
-        return this.n;
+        return this.name;
     }
 
     public Races get_race() {
-        return this.r;
+        return this.race;
     }
 
     public Backgrounds get_background() {
-        return this.b;
+        return this.background;
     }
 
     public Classes get_class() {
-        return this.c;
+        return this.character;
     }
 
     public int get_max_health() {
@@ -253,12 +253,16 @@ public class Character {
         return this.charisma;
     }
 
+    /**
+     * It's toString, y'all! See the specification for overriding this method in
+     * the documentation for the Object class.
+     */
     @Override
     public String toString() {
         return
-                "Name: " + this.n + ", " +
-                "Class: " + this.c + ", " +
-                "Background: " + this.b + ", " +
+                "Name: " + this.name + ", " +
+                "Class: " + this.character + ", " +
+                "Background: " + this.background + ", " +
                 "Level: " + this.level + ", " +
                 "Str: " + this.strength + " " +
                 "Dex: " + this.dexterity + " " +
@@ -272,52 +276,41 @@ public class Character {
 
     // static methods
 
-    // reads in character information
-    public static String[] readCharacterFiles() {
-        /* NOT YET IMPLEMENTED
-
-        // first count how many character files are in the directory and store their names
-        verifyDirectoryAndCharacterFiles();
-        int fileCount = Objects.requireNonNull(new File("./src/main/java/Back_End/CharacterFiles/")
-                .list()).length;
-        // next, create an array of Strings, each of which will represent a single character file's data
-        String[] characterStrings = new String[fileCount];
-        // iterate over the array of Strings, reading each file into a location in the array at each step
-        int i = 0;
-        while (i < fileCount) {
-
-        }
-        // return the array of Strings
-        return characterStrings;
-        */
-        throw new RuntimeException("Not Yet Implemented!");
-    }
-
-    // returns the contents of character file at filepath path as one big long string
+    /**
+     * Returns the contents of the character file at Path path as a String
+     *
+     * @param path - the filepath to the character file as a Path object
+     * @return - a String containing the text in the file at filepath path
+     * @throws IOException - if the file cannot be read for some reason (e.g., permissions/existence)
+     */
     public static String readCharacterFromFile(Path path) throws IOException {
         return Files.readString(path, StandardCharsets.US_ASCII);
     }
 
-    // writes Character c's data to a new text file in .../Main/src/main/java/Back_End/CharacterFiles/<c.name>.txt,
-    // unless the file already exists, in which case it overwrites the data in the file
+    /**
+     * Writes character c's data to a new text file at .../Main/src/main/java/Back_End/CharacterFiles/(c.name).txt,
+     * unless that file already exists, in which case the data in the file is overwritten.
+     *
+     * @param c - the Character object whose data will be written to file
+     */
     public static void writeCharacterToFile(Character c) {
-        String fileName = c.n + ".txt";
+        String fileName = c.name + ".txt";
         Path newFilePath = Paths.get("./src/main/java/Back_End/CharacterFiles/" + fileName);
         // create the file
         try {
             Files.createFile(newFilePath);
         } catch (FileAlreadyExistsException e) {
-            System.out.println("Character file for " + c.n + " already exists! Overwriting...");
+            System.out.println("Character file for " + c.name + " already exists! Overwriting...");
         } catch (IOException e) {
-            System.err.println("Couldn't create new file for character: " + c.n);
+            System.err.println("Couldn't create new file for character: " + c.name);
             e.printStackTrace();
             return;
         }
         // write the data
-        String name = c.n;
-        String character_class = String.valueOf(c.c);
-        String race = String.valueOf(c.r);
-        String background = String.valueOf(c.b);
+        String name = c.name;
+        String character_class = String.valueOf(c.character);
+        String race = String.valueOf(c.race);
+        String background = String.valueOf(c.background);
         String level = "Level: " + c.level;
         String stats = c.strength + " " + c.dexterity + " " + c.constitution + " " + c.intelligence
                        + " " + c.wisdom + " " + c.charisma;
@@ -340,8 +333,14 @@ public class Character {
 
     }
 
-    // takes a String of character data and returns a Character if the String is well-formed
-    // according to a specified format
+    /**
+     * Takes a String of character data and returns a Character object if the String is
+     * well-formed according to a specified file-format (see Steve The Sneaky.txt for an example).
+     * NOTE: this method currently has no error-checking whatsoever, so make sure the data in
+     * the String follows the specified format or else suffer...
+     * @param s - the String of character data
+     * @return - a newly created Character object
+     */
     public static Character createCharacterFromString(String s) {
         Character newChar = new Character();
         List<String> charInfo = new ArrayList<>(List.of(s.split("\\R")));
@@ -384,8 +383,18 @@ public class Character {
         return newChar;
     }
 
-    // takes a List of Strings and returns a List of Characters, one for each
-    // of the .txt files specified by the names in the input list
+    /**
+     * Takes a list of Strings -- where each String should correspond to the name
+     * of a character file in .../Main/src/main/java/Back_End/CharacterFiles -- and
+     * returns a List of Characters corresponding to the data in the files.
+     *
+     * @param characterStrings - the List of Strings where each represents a file stored
+     *                         in the specified location (e.g., "Steve The Sneaky"
+     *                         represents the file "Steve The Sneaky.txt"
+     * @return - a List of Characters corresponding to the files in the input list
+     * @throws IOException - if there is any problem reading the files corresponding
+     * to the Strings in the input list
+     */
     public static List<Character> createListOfCharacters(List<String> characterStrings) throws IOException {
         List<Character> characters = new ArrayList<>();
         for (String characterFile : characterStrings) {
@@ -397,8 +406,13 @@ public class Character {
         return characters;
     }
 
-    // for now, just verifies that the directory where we're going to look for character files
-    // already exists
+    /**
+     * Verifies that the directory where character files should live (currently
+     * .../Main/src/main/java/Back_End/CharacterFiles/) actually exists; if it
+     * doesn't exist, this method creates it. This method is run immediately
+     * upon server initialization in SparkServer.java.
+     *
+     */
     public static void verifyDirectoryAndCharacterFiles() {
         Path p = Paths.get("./src/main/java/Back_End/CharacterFiles/");
         System.out.println("Verifying that directory for character files exists...");
@@ -419,8 +433,14 @@ public class Character {
         }
     }
 
-    // returns a List of Strings where each entry represents the name
-    // of a file corresponding to a character whose data is stored on disk
+    /**
+     * Returns a list of Strings where each entry represents the name of a file
+     * corresponding to a character whose data is stored on disk at
+     * .../Main/src/java/Back_End/CharacterFiles/
+     *
+     * @return - a list of Strings extracted from the filenames in the
+     * directory
+     */
     public static List<String> getCharNames() {
         verifyDirectoryAndCharacterFiles();
         List<String> charNames = new ArrayList<>();
@@ -462,11 +482,11 @@ public class Character {
         // ... and then write a character file to disk...
         System.out.println("Attempting to write a character to a new file...");
         writeCharacterToFile(testChar);
-        System.out.println("Character: " + testChar.n + " successfully written to disk.");
+        System.out.println("Character: " + testChar.name + " successfully written to disk.");
         System.out.println();
 
         // ... and then read the data back out into one big long string...
-        Path charPath = Paths.get("./src/main/java/Back_End/CharacterFiles/" + testChar.n + ".txt");
+        Path charPath = Paths.get("./src/main/java/Back_End/CharacterFiles/" + testChar.name + ".txt");
         System.out.println("Attempting to read in character data from: " + charPath + " ...\n");
         try {
             System.out.println("Data read from file: \n" + readCharacterFromFile(charPath));
