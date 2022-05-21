@@ -17,6 +17,12 @@ public class Dice {
         return values;
     }
 
+    /**
+     * A method that rolls the D20 and adds the character's proficiency to indicate their ability to perform a task.
+     * 
+     * @param proficiency An integer value to add to the roll, indicating the bonus the current character has at the given task
+     * @return An integer value that indicates the ability check score for a given task
+     */
     public static Map<String, Integer> RollAC(Character currChar, String ability, String type) {
         
         Map<String, Integer> roll_data = new HashMap<>();
