@@ -19,7 +19,7 @@ export default function PlayPage() {
   /**
    * Set Character details based on the picked character by the user
    * */
-  const [charData, setcharData] = useState([]);
+  const [charData, setCharData] = useState([]);
 
   /**
    * Provide all stored characters for the user to select for the game
@@ -98,7 +98,8 @@ export default function PlayPage() {
           throw new Error("server unavailable");
         })
         .then((data) => {
-          setcharData(data);
+          console.log(data);
+          setCharData(data);
         });
     }
   }
