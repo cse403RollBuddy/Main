@@ -15,7 +15,19 @@ public class Dice {
         return values;
     }
 
-    public static int RollAC(int proficiency) {
+    public static int RollAC(Character currChar, String ability) {
+        int proficiency;
+        switch(ability) {
+                case "charisma" : proficiency = currChar.get_charisma();
+                case "constitution" : proficiency = currChar.get_constitution();
+                case "dexterity" : proficiency = currChar.get_dexterity();
+                case "intelligence" : proficiency = currChar.get_intelligence();
+                case "strength" : proficiency = currChar.get_strength();
+                case "wisdom" : proficiency = currChar.get_wisdom();
+
+                default: proficiency = 0;
+            }
+        proficiency = (proficiency / 2) - 5;
         Random rand = new Random();
         int roll = rand.nextInt(20) + 1;
         return roll + proficiency;
