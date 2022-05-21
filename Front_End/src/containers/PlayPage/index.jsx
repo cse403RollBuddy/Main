@@ -8,20 +8,39 @@ import CharacterPageService from "../CharacterPage/service";
 import Input from "../../components/Input";
 import Ability from "../../components/Ability";
 
+
+/**
+ * This is the play page where a uer can choose a character to review
+ * the current state of the chosen character, change the character states
+ * using dice rolls, and update character data when finish playing
+ */
 export default function PlayPage() {
   const history = useNavigate();
 
+  /**
+   * Set Character details based on the picked character by the user
+   * */
+  const[charData, setcharData] = useState([]);
+
+  /**
+   * Provide all stored characters for the user to select for the game
+   * */
   const [characters, setCharacters] = useState([]);
+
+  /**
+   * Set the picked character based on user's selection
+   * */
   const [selectedCharacter, setSelectedCharacter] = useState("");
 
-  const [strength, setStrength] = useState();
-  const [dexterity, setDexterity] = useState();
-  const [constitution, setConstitution] = useState();
-  const [intelligence, setIntelligence] = useState();
-  const [wisdom, setWisdom] = useState();
-  const [charisma, setCharisma] = useState();
+
+  /**
+   * Set the score returned from dice rolling
+   * */
   const [score, setScore] = useState(0);
 
+  /**
+  * Obtain all saved characters from the server
+  * */
   async function getCharacters() {
     await fetch("http://localhost:4567/characters")
       .then((response) => response.json())
@@ -33,47 +52,42 @@ export default function PlayPage() {
       });
   }
 
-  // async function getCharaterData(character) {
-  //   await fetch("http://localhost:4567/select-character?name=" + character)
-  //     .then((response) => response.json())
-  //     .catch((e) => {
-  //       throw new Error("server unavailable");
-  //     })
-  //     .then((data) => {
-  //       setCharisma(3);
-  //       setWisdom(18);
-  //       setDexterity(16);
-  //       setStrength(data.Strength);
-  //       setIntelligence(data.Intelligence);
-  //       setConstitution(data.Constitution);
-  //     });
-  // }
+
+  /**
+  * Obtain selected character data from the server
+  * */
+
+  async function getCharacterData() {
+    if (selectedCharacter) {
+      await fetch("http://localhost:4567/select-character?name=" + selectedCharacter.value)
+          .then((response) => response.json())
+          .catch((e) => {
+            throw new Error("server unavailable");
+          })
+          .then((data) => {
+            setcharData(data);
+          });
+    }
+  }
 
   useEffect(() => {
     getCharacters();
   }, []);
 
   useEffect(() => {
-    // getCharaterData();
-    setAbility();
+    getCharacterData();
+   // setAbility();
   }, [selectedCharacter]);
 
-  function setAbility() {
-    if (selectedCharacter) {
-      setCharisma(16);
-      setWisdom(6);
-      setDexterity(13);
-      setStrength(10);
-      setIntelligence(5);
-      setConstitution(3);
-    }
-  }
-
+  /**
+   * Navigate to HomePage
+   */
   const onMainClick = (e) => {
     e.preventDefault();
     history("/HomePage");
   };
 
+  /* List all the abilities as input box now, consider to use a form component later */
   return (
     <div>
       <Nav>
@@ -81,7 +95,7 @@ export default function PlayPage() {
       </Nav>
       <MainContainer>
         <DropDownList
-          label={"Characters"}
+          label={"Select a character"}
           value={selectedCharacter}
           maxMenuHeight={150}
           setSelectedOptions={setSelectedCharacter}
@@ -91,41 +105,29 @@ export default function PlayPage() {
           }))}
           isMulti={false}
         />
-        <Ability
+        <Input
           label={"Strength"}
-          placeholder={"score"}
-          value={strength}
-          onChange={setStrength}
+          value={charData.strength}
         />
-        <Ability
+        <Input
           label={"Charisma"}
-          placeholder={"score"}
-          value={charisma}
-          onChange={setCharisma}
+          value={charData.charisma}
         />
-        <Ability
+        <Input
           label={"Dexterity"}
-          placeholder={"score"}
-          value={dexterity}
-          onChange={setDexterity}
+          value={charData.dexterity}
         />
-        <Ability
+        <Input
           label={"Constitution"}
-          placeholder={"score"}
-          value={constitution}
-          onChange={setConstitution}
+          value={charData.constitution}
         />
-        <Ability
+        <Input
           label={"Intelligence"}
-          placeholder={"score"}
-          value={intelligence}
-          onChange={setIntelligence}
+          value={charData.intelligence}
         />
-        <Ability
+        <Input
           label={"Wisdom"}
-          placeholder={"score"}
-          value={wisdom}
-          onChange={setWisdom}
+          value={charData.wisdom}
         />
 
         <Button

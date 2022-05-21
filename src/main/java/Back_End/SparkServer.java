@@ -16,6 +16,13 @@ import java.util.Map;
 public class SparkServer {
 
 
+    /**
+     * The main serve method that is run by the Spark Server, includes all the GET paths that the front end
+     *  uses to communicate to the backend
+     * 
+     * @param args, nothing needed from user to run in this case
+     * @throws IOException, Throws an IOException if the system was unable to read/write to a file
+     */
     public static void main (String[] args) throws IOException {
 
         Gson gson = new Gson();
@@ -25,10 +32,13 @@ public class SparkServer {
         corsFilter.apply();
         List<Character> charList = Character.createListOfCharacters(Character.getCharNames());
 
+        //An example get path, not used for anything besides testing
         get("/data", (req, res) -> {
             ExampleDataTransfer example = new ExampleDataTransfer();
             return example.getData();
         });
+
+        //An example path used for testing, who doesn't like saying hi the world?
         get("/hello", (req, res) -> "Hello world");
 
         // matches "GET /hello/foo" and "GET /hello/bar"
@@ -52,6 +62,24 @@ public class SparkServer {
             return result.stream().mapToInt(Integer::intValue).sum();
         });
 
+        // Rolls a d20 and adds the characters profiency to it
+        // USES beingCreated AS THE CURRENT CHARACTER, IS THAT CORRECT?
+        get("/abilityroll", (req, res) -> {
+            String ability = req.queryParams("ability");
+            int proficiency;
+            switch(ability) {
+                case "charisma" : proficiency = beingCreated.get_charisma();
+                case "constitution" : proficiency = beingCreated.get_constitution();
+                case "dexterity" : proficiency = beingCreated.get_dexterity();
+                case "intelligence" : proficiency = beingCreated.get_intelligence();
+                case "strength" : proficiency = beingCreated.get_strength();
+                case "wisdom" : proficiency = beingCreated.get_wisdom();
+
+                default: proficiency = 0;
+            }
+            return Dice.RollAC((proficiency / 2) - 5);
+        });
+
         // sets the character's name
         get("/create", (req, res) -> {
                     String param = req.queryParams("name");
@@ -59,6 +87,7 @@ public class SparkServer {
                     return 0;
         });
 
+        //Sets the class of the character being made, not used currently by the front end.
         get("/setclass", (req, res) -> {
            String characterClass = req.queryParams("class").toUpperCase();
            switch (characterClass) {
@@ -69,6 +98,7 @@ public class SparkServer {
            return 0;
         });
 
+        //Sets the background of the character being made, not used currently by the front end.
         get("/setbackground", (req, res) -> {
             String background = req.queryParams("background").toUpperCase();
             switch (background) {
@@ -134,6 +164,7 @@ public class SparkServer {
             return gson.toJson(chars);
         });
 
+        //Returns the character with the given name, or an empty character if none is made
         get("/select-character", (req, res) -> {
             String name = req.queryParams("name");
             for (Character c : charList) {
