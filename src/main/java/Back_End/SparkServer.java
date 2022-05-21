@@ -53,8 +53,9 @@ public class SparkServer {
         // Rolls a d20 and adds the characters profiency to it
         // USES beingCreated AS THE CURRENT CHARACTER, IS THAT CORRECT?
         get("/abilityroll", (req, res) -> {
-            //Get second parameter first since it is quickest.
+            //Get second & thrid parameters first since they are quickest.
             String ability = req.queryParams("ability");
+            String type = req.queryParams("roll-type");
 
             //Get first parameter, and find character
             //If DNE character is default constructed
@@ -66,7 +67,7 @@ public class SparkServer {
             }
             
             //Call Roll AC with updated parameters
-            return Dice.RollAC(Character, ability);
+            return gson.toJson(Dice.RollAC(charToRoll, ability, type));
         });
 
         // sets the character's name
