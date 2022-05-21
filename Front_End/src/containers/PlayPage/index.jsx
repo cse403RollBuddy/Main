@@ -142,8 +142,8 @@ export default function PlayPage() {
             isMulti={false}
           />
           <Input label="Race" value={charData.race} />
-          <Input label="Class" value={charData.class} />
-          <Input label="Class" value={charData.bac} />
+          <Input label="Class" value={charData.classtype} />
+          <Input label="Class" value={charData.background} />
           <Input label="Class" value={charData.level} />
         </HorizontalBox>
         <Input label={"Strength"} value={charData.strength} />
