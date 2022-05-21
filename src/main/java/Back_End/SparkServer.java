@@ -212,5 +212,21 @@ public class SparkServer {
             charList.add(newChar);
             return gson.toJson(newCharInfo);
         });
+
+
+        get("/update", (req, res) -> {
+            //Get second & thrid parameters first since they are quickest.
+            String field = req.queryParams("field");
+            int newVal = Integer.valueOf(req.queryParams("new-val"));
+
+            //Get first parameter, and find character
+            //If DNE character is default constructed
+            String name = req.queryParams("name");
+            Character charToRoll = new Character();
+            List<Character> chars = Character.createListOfCharacters(Character.getCharNames());
+            for (Character c : chars) {
+                if (c.get_name().equals(name)) { charToRoll = c; }
+            }
+        });
     }
 }
