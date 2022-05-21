@@ -4,8 +4,15 @@ import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
 import {Nav, RollBuddyTitle} from "../../components/RollBuddyTitle";
 
+/**
+ * This is the enter page when the application starts
+ */
 export default function StartPage() {
   const history = useNavigate();
+
+  /**
+   * Navigate to HomePage
+   */
   const onMainClick = (e) => {
     e.preventDefault();
     history("/HomePage");
