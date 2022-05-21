@@ -14,7 +14,7 @@ public class Character {
     private String name = null;
     private Races race = null;
     private Backgrounds background = null;
-    private Classes character = null;
+    private Classes classtype = null;
 
     private int max_health = 0;
     private int current_health = 0;
@@ -114,20 +114,20 @@ public class Character {
     }
 
     public void set_class(Classes c) {
-        if (this.character != null) {
-            if (this.character == Classes.CLERIC) {
+        if (this.classtype != null) {
+            if (this.classtype == Classes.CLERIC) {
                 // set max health with 1d8 OR:
                 this.max_health -= 5;
                 this.current_health -= 5;
                 // saving throws wisdom, charisma
                 // choose 2 skill proficiency: history, insight, medicine, persuasion, religion
-            } else if (this.character == Classes.FIGHTER) {
+            } else if (this.classtype == Classes.FIGHTER) {
                 // set max health with 1d10 OR:
                 this.max_health -= 6;
                 this.current_health -= 6;
                 // saving throws strength, constitution
                 // choose 2 skill proficiency: acrobatics, animal handling, athletics, history, insight, intimidation, perception, survival
-            } else if (this.character == Classes.ROGUE) {
+            } else if (this.classtype == Classes.ROGUE) {
                 // set max health with 1d8 OR:
                 this.max_health -= 5;
                 this.current_health -= 6;
@@ -135,20 +135,20 @@ public class Character {
                 // choose 4 skill proficiency: Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, Stealth
             }
         }
-        this.character = c;
-        if (this.character == Classes.CLERIC) {
+        this.classtype = c;
+        if (this.classtype == Classes.CLERIC) {
             // set max health with 1d8 OR:
             this.max_health += 5;
             this.current_health += 5;
             // saving throws wisdom, charisma
             // choose 2 skill proficiency: history, insight, medicine, persuasion, religion
-        } else if (this.character == Classes.FIGHTER) {
+        } else if (this.classtype == Classes.FIGHTER) {
             // set max health with 1d10 OR:
             this.max_health += 6;
             this.current_health += 6;
             // saving throws strength, constitution
             // choose 2 skill proficiency: acrobatics, animal handling, athletics, history, insight, intimidation, perception, survival
-        } else if (this.character == Classes.ROGUE) {
+        } else if (this.classtype == Classes.ROGUE) {
             // set max health with 1d8 OR:
             this.max_health += 5;
             this.current_health += 5;
@@ -214,7 +214,7 @@ public class Character {
     }
 
     public Classes get_class() {
-        return this.character;
+        return this.classtype;
     }
 
     public int get_max_health() {
@@ -261,7 +261,7 @@ public class Character {
     public String toString() {
         return
                 "Name: " + this.name + ", " +
-                "Class: " + this.character + ", " +
+                "Class: " + this.classtype + ", " +
                 "Background: " + this.background + ", " +
                 "Level: " + this.level + ", " +
                 "Str: " + this.strength + " " +
@@ -308,7 +308,7 @@ public class Character {
         }
         // write the data
         String name = c.name;
-        String character_class = String.valueOf(c.character);
+        String character_class = String.valueOf(c.classtype);
         String race = String.valueOf(c.race);
         String background = String.valueOf(c.background);
         String level = "Level: " + c.level;
