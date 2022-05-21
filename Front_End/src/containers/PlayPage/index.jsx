@@ -98,7 +98,6 @@ export default function PlayPage() {
           throw new Error("server unavailable");
         })
         .then((data) => {
-          console.log(data);
           setCharData(data);
         });
     }
@@ -106,18 +105,19 @@ export default function PlayPage() {
 
   async function submitDice() {
     await fetch(
-      "http://localhost:4567/diceroll?name=" +
+      "http://localhost:4567/abilityroll?name=" +
         selectedCharacter.value +
-        "?ability=" +
-        selectedRollAbility +
-        "?roll-type=" +
-        selectedRollType
+        "&ability=" +
+        selectedRollAbility.value +
+        "&roll-type=" +
+        selectedRollType.value
     )
       .then((response) => response.json())
       .catch((e) => {
         throw new Error("server unavailable");
       })
       .then((data) => {
+        console.log(data);
         setScore(data);
       });
   }
@@ -146,12 +146,23 @@ export default function PlayPage() {
           <Input label="Class" value={charData.background} />
           <Input label="Level" value={charData.level} />
         </HorizontalBox>
-        <Input label={"Strength"} value={charData.strength} />
-        <Input label={"Charisma"} value={charData.charisma} />
-        <Input label={"Dexterity"} value={charData.dexterity} />
-        <Input label={"Constitution"} value={charData.constitution} />
-        <Input label={"Intelligence"} value={charData.intelligence} />
-        <Input label={"Wisdom"} value={charData.wisdom} />
+        <HorizontalBox>
+          <VerticalBox>
+            <Input label={"Strength"} value={charData.strength} />
+            <Input label={"Charisma"} value={charData.charisma} />
+            <Input label={"Dexterity"} value={charData.dexterity} />
+            <Input label={"Constitution"} value={charData.constitution} />
+            <Input label={"Intelligence"} value={charData.intelligence} />
+            <Input label={"Wisdom"} value={charData.wisdom} />
+          </VerticalBox>
+          <VerticalBox>
+            <Input
+              label="Max Health"
+              readonly={true}
+              value={charData.maxhealth}
+            />
+          </VerticalBox>
+        </HorizontalBox>
         <HorizontalBox>
           <VerticalBox>
             <DropDownList
@@ -183,12 +194,15 @@ export default function PlayPage() {
             buttonText="Roll Dice "
           />
         </HorizontalBox>
-        {/* <HorizontalBox>
-          <Input label="High" value={score.low} />
-          <Input label="Low" value={score.high} />
-          <Input label="Modifier" value={score.mod} />
-          <Input label="Total" value={score.total} />
-        </HorizontalBox> */}
+        <HorizontalBox>
+          <Input label="High" value={score === undefined ? "" : score.high} />
+          <Input label="Low" value={score === undefined ? "" : score.low} />
+          <Input
+            label="Modifier"
+            value={score === undefined ? "" : score.mod}
+          />
+          <Input label="Total" value={score === undefined ? "" : score.total} />
+        </HorizontalBox>
       </MainContainer>
     </div>
   );
