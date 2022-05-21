@@ -19,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "gradle": "../run_backend.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clear-snapshots": "npm run test -- -u"
@@ -46,5 +47,8 @@
     "jest-styled-components": "^7.0.8",
     "react-test-renderer": "^18.1.0",
     "styled-components": "^5.3.5"
-  }
+  },
+  "description": "This folder has all the front end applications. Steps to start react in you local environment",
+  "author": "",
+  "license": "ISC"
 }

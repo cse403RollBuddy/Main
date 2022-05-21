@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
+/**
+ * This is basic input box component
+ */
 export const InputBox = styled.input`
   border: 1px solid #000;
   border-radius: 3px;
   padding: 10px;
   margin: 5px;
-  width: 175px;
+  width: 100px;
   box-sizing: border-box;
 `;
 
