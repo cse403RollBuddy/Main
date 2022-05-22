@@ -151,8 +151,10 @@ public class SparkServer {
         // for the frontend to get the list of possible Races
         get("/races", (req, res) -> gson.toJson("HUMAN ELF DWARF HALFLING"));
 
-        // shuts down the server
+        // writes all character data to .../Main/src/main/java/Back_End/CharacterFiles
+        // and then shuts down the server
         get("/shutdown", (req, res) -> {
+            charList.forEach(Character::writeCharacterToFile);
             stop();
             return "Server successfully shutdown.";
         });
@@ -180,7 +182,7 @@ public class SparkServer {
             Character.verifyDirectoryAndCharacterFiles();
             JsonReader reader = new JsonReader(new StringReader(req.queryParams("character")));
             reader.setLenient(true);
-            Map newCharInfo = gson.fromJson(reader, Map.class);
+            Map<?,?> newCharInfo = gson.fromJson(reader, Map.class);
 
             System.out.println(newCharInfo);
 
@@ -214,19 +216,38 @@ public class SparkServer {
         });
 
 
+        // updates field given by 'field' of Character given by 'name' to
+        // value given by 'new-val'
+        // currently only works for gold coins and current health
+        // call it like "http://localhost:4567/update?name=Hunter&new-val=1000&field=gold"
+        // NOTE: updates will only be written to disk if the server is shut down cleanly
+        // via the /shutdown path, otherwise updates will be lost into the void...
         get("/update", (req, res) -> {
-            //Get second & thrid parameters first since they are quickest.
+            //Get second & third parameters first since they are quickest.
             String field = req.queryParams("field");
-            int newVal = Integer.valueOf(req.queryParams("new-val"));
+            // make sure new-val is a number, or else failure
+            try { Integer.parseInt(req.queryParams("new-val")); }
+            catch (NumberFormatException e) { return "Nothing updated"; }
+            int newVal = Integer.parseInt(req.queryParams("new-val"));
 
-            //Get first parameter, and find character
-            //If DNE character is default constructed
+            // Get first parameter, and find character
             String name = req.queryParams("name");
-            Character charToRoll = new Character();
-            List<Character> chars = Character.createListOfCharacters(Character.getCharNames());
-            for (Character c : chars) {
-                if (c.get_name().equals(name)) { charToRoll = c; }
+            Character charToUpdate = new Character();
+            // INVARIANT: any character in the user's display list is already in charList
+            //            i.e., this always puts some character in charToRoll
+            for (Character c : charList) {
+                if (c.get_name().equals(name)) { charToUpdate = c; }
             }
+            // invariant violated ==> failure
+            if (charToUpdate.get_name() == null) { return "Nothing updated"; }
+            // use this in case we want to extend the use of this path to other fields
+            switch (field.toLowerCase()) {
+                case "gold": charToUpdate.set_gold_coins(newVal); break;
+                case "currenthealth": charToUpdate.set_current_health(newVal); break;
+                // case "someField": charToRoll.set_someField(newVal); break;
+                default:  return "Nothing updated";
+            }
+            return "Success";
         });
     }
 }
