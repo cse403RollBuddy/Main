@@ -44,12 +44,17 @@ export default function PlayPage() {
 
   const [rollAbility, setRollAbility] = useState([]);
 
-  /**
-   * Navigate to HomePage
-   */
-  const onMainClick = (e) => {
+  const [currentHealth, setCurrentHealth] = useState(0);
+
+  const [experience, setExperience] = useState(0);
+
+  const onExperienceChange = (e) => {
     e.preventDefault();
-    history("/HomePage");
+    setExperience(e.target.value);
+  };
+
+  const sendCurrentHealth = () => {
+    console.log("TODO SEND TO BACKEND");
   };
 
   useEffect(() => {
@@ -141,19 +146,43 @@ export default function PlayPage() {
             }))}
             isMulti={false}
           />
-          <Input label="Race" value={charData.race} />
-          <Input label="Class" value={charData.classtype} />
-          <Input label="Class" value={charData.background} />
-          <Input label="Level" value={charData.level} />
+          <Input label={"Race"} readonly={true} value={charData.race} />
+          <Input label={"Class"} readonly={true} value={charData.classtype} />
+          <Input
+            label={"Background"}
+            readonly={true}
+            value={charData.background}
+          />
+          <Input label={"Level"} readonly={true} value={charData.level} />
         </HorizontalBox>
         <HorizontalBox>
           <VerticalBox>
-            <Input label={"Strength"} value={charData.strength} />
-            <Input label={"Charisma"} value={charData.charisma} />
-            <Input label={"Dexterity"} value={charData.dexterity} />
-            <Input label={"Constitution"} value={charData.constitution} />
-            <Input label={"Intelligence"} value={charData.intelligence} />
-            <Input label={"Wisdom"} value={charData.wisdom} />
+            <Input
+              label={"Strength"}
+              readonly={true}
+              value={charData.strength}
+            />
+            <Input
+              label={"Charisma"}
+              readonly={true}
+              value={charData.charisma}
+            />
+            <Input
+              label={"Dexterity"}
+              readonly={true}
+              value={charData.dexterity}
+            />
+            <Input
+              label={"Constitution"}
+              readonly={true}
+              value={charData.constitution}
+            />
+            <Input
+              label={"Intelligence"}
+              readonly={true}
+              value={charData.intelligence}
+            />
+            <Input label={"Wisdom"} readonly={true} value={charData.wisdom} />
           </VerticalBox>
           <VerticalBox>
             <Input
@@ -161,6 +190,36 @@ export default function PlayPage() {
               readonly={true}
               value={charData.maxhealth}
             />
+            <HorizontalBox>
+              <Input
+                label="Current Health"
+                readonly={true}
+                value={currentHealth}
+              />
+              <Button
+                buttonText={"+"}
+                onClickAction={() => setCurrentHealth(currentHealth + 1)}
+              ></Button>
+              <Button
+                buttonText={"-"}
+                onClickAction={() => setCurrentHealth(currentHealth - 1)}
+              ></Button>
+              <Button
+                buttonText={"Update"}
+                onClickAction={sendCurrentHealth}
+              ></Button>
+            </HorizontalBox>
+            <HorizontalBox>
+              <Input
+                label="Experience"
+                onChange={onExperienceChange}
+                value={experience}
+              />
+              <Button buttonText={"Update"}></Button>
+            </HorizontalBox>
+            <HorizontalBox>
+              <Input label={"Gold Coins"} value={charData.goldcoins}></Input>
+            </HorizontalBox>
           </VerticalBox>
         </HorizontalBox>
         <HorizontalBox>
