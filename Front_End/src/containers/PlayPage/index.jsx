@@ -46,7 +46,24 @@ export default function PlayPage() {
 
   const [currentHealth, setCurrentHealth] = useState(0);
 
+  const [goldCoins, setGoldCoins] = useState(0);
+
   const [experience, setExperience] = useState(0);
+
+  /* Save the character data and Navigate back to home page */
+
+  const onMainClick = (e) => {
+    e.preventDefault();
+    const savedData = {
+      name:charData.name,
+      updated_health: currentHealth,
+      updated_experience: 8, // experience,
+      updated_goldcoins: goldCoins,
+    };
+    submitUpdate(JSON.stringify(savedData));
+    history("/HomePage");
+  };
+
 
   const onExperienceChange = (e) => {
     e.preventDefault();
@@ -57,6 +74,13 @@ export default function PlayPage() {
     console.log("TODO SEND TO BACKEND");
   };
 
+  const sendCurrentExperience = () => {
+    console.log("TODO SEND TO BACKEND");
+  };
+
+  const sendCurrentGoldCoins =() => {
+
+  }
   useEffect(() => {
     getCharacters();
     setRollTypes(["Regular", "Advantage", "Disadvantage"]);
@@ -104,9 +128,24 @@ export default function PlayPage() {
         })
         .then((data) => {
           setCharData(data);
+          setCurrentHealth(charData.current_health);
+          setExperience(2); // need data from backend
+          setGoldCoins(charData.gold_coins);
         });
     }
   }
+
+  /**
+   * Send saved data of current health, experience, and gold coins  back to the server
+   * */
+  async function submitUpdate(char) {
+    await fetch("http://localhost:4567/new-character?character=" + char)// TODO change to correct url
+        .then((response) => response.json())
+        .catch((e) => {
+          throw new Error("server unavailable");
+        });
+  }
+
 
   async function submitDice() {
     await fetch(
@@ -188,7 +227,7 @@ export default function PlayPage() {
             <Input
               label="Max Health"
               readonly={true}
-              value={charData.maxhealth}
+              value={charData.max_health}
             />
             <HorizontalBox>
               <Input
@@ -212,15 +251,40 @@ export default function PlayPage() {
             <HorizontalBox>
               <Input
                 label="Experience"
-                onChange={onExperienceChange}
-                value={experience}
+                value={experience} // <charData.current_experience>  need backend to add this field
               />
-              <Button buttonText={"Update"}></Button>
+              <Button
+                  buttonText={"+"}
+                  onClickAction={() =>  setExperience(experience + 1)}
+              ></Button>
+              <Button
+                  buttonText={"-"}
+                  onClickAction={() =>  setExperience(experience - 1)}
+              ></Button>
+              <Button buttonText={"Update"}
+                      onClickAction={sendCurrentExperience}></Button>
             </HorizontalBox>
             <HorizontalBox>
-              <Input label={"Gold Coins"} value={charData.goldcoins}></Input>
+              <Input label={"Gold Coins"} value={goldCoins}></Input>
+              <Button
+                  buttonText={"+"}
+                  onClickAction={() =>  setGoldCoins(goldCoins + 1)}
+              ></Button>
+              <Button
+                  buttonText={"-"}
+                  onClickAction={() =>  setGoldCoins(goldCoins - 1)}
+              ></Button>
+              <Button buttonText={"Update"}
+                      onClickAction={sendCurrentGoldCoins}></Button>
             </HorizontalBox>
           </VerticalBox>
+          <verticalBox>
+            <Button
+                onClickAction={onMainClick}
+                buttonText="Update"
+                buttonColor="blue"
+            />
+          </verticalBox>
         </HorizontalBox>
         <HorizontalBox>
           <VerticalBox>
