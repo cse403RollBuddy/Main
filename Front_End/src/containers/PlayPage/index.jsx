@@ -52,35 +52,6 @@ export default function PlayPage() {
 
   /* Save the character data and Navigate back to home page */
 
-  const onMainClick = (e) => {
-    e.preventDefault();
-    const savedData = {
-      name:charData.name,
-      updated_health: currentHealth,
-      updated_experience: 8, // experience,
-      updated_goldcoins: goldCoins,
-    };
-    submitUpdate(JSON.stringify(savedData));
-    history("/HomePage");
-  };
-
-
-  const onExperienceChange = (e) => {
-    e.preventDefault();
-    setExperience(e.target.value);
-  };
-
-  const sendCurrentHealth = () => {
-    console.log("TODO SEND TO BACKEND");
-  };
-
-  const sendCurrentExperience = () => {
-    console.log("TODO SEND TO BACKEND");
-  };
-
-  const sendCurrentGoldCoins =() => {
-
-  }
   useEffect(() => {
     getCharacters();
     setRollTypes(["Regular", "Advantage", "Disadvantage"]);
@@ -102,6 +73,41 @@ export default function PlayPage() {
   /**
    * Obtain all saved characters from the server
    * */
+
+
+  const onMainClick = (e) => {
+    e.preventDefault();
+    history("/HomePage");
+  };
+
+
+  const onExperienceChange = (e) => {
+    e.preventDefault();
+    setExperience(e.target.value);
+  };
+
+  const sendCurrentHealth = (e) => {
+    e.preventDefault();
+    const updateHealth = {
+      name: charData.name,
+      currenthealth: currentHealth,
+    };
+    submitUpdate(JSON.stringify(updateHealth));
+  }
+
+  const sendCurrentExperience = () => {
+    console.log("TODO SEND TO BACKEND");
+  };
+
+  const sendCurrentGoldCoins =(e) => {
+    e.preventDefault();
+    const updateGold = {
+      name: charData.name,
+      gold: goldCoins,
+    };
+    submitUpdate(JSON.stringify(updateGold));
+  }
+
   async function getCharacters() {
     await fetch("http://localhost:4567/characters")
       .then((response) => response.json())
@@ -138,8 +144,8 @@ export default function PlayPage() {
   /**
    * Send saved data of current health, experience, and gold coins  back to the server
    * */
-  async function submitUpdate(char) {
-    await fetch("http://localhost:4567/new-character?character=" + char)// TODO change to correct url
+  async function submitUpdate(update) {
+    await fetch("http://localhost:4567/update?update=" + update)
         .then((response) => response.json())
         .catch((e) => {
           throw new Error("server unavailable");
