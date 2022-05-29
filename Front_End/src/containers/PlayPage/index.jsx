@@ -67,6 +67,12 @@ export default function PlayPage() {
 
   useEffect(() => {
     getCharacterData();
+    if (!selectedCharacter) {
+      setExperience(0);
+      setGoldCoins(0);
+      setCurrentHealth(0);
+      setCharData([]);
+    }
     // setAbility();
   }, [selectedCharacter]);
 
@@ -74,38 +80,59 @@ export default function PlayPage() {
    * Obtain all saved characters from the server
    * */
 
-
   const onMainClick = (e) => {
     e.preventDefault();
     history("/HomePage");
   };
-
 
   const onExperienceChange = (e) => {
     e.preventDefault();
     setExperience(e.target.value);
   };
 
-  const sendCurrentHealth = (e) => {
-    e.preventDefault();
-    const updateHealth = {
-      name: charData.name,
-      currenthealth: currentHealth,
-    };
-    submitUpdate(JSON.stringify(updateHealth));
+  async function sendCurrentHealth() {
+    await fetch(
+      "http://localhost:4567/update?name=" +
+        selectedCharacter +
+        "&new-val=" +
+        currentHealth +
+        "&field=currenthealth"
+    )
+      .then((response) => response.json())
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then(console.log("Submited current health"));
   }
 
-  const sendCurrentExperience = () => {
-    console.log("TODO SEND TO BACKEND");
-  };
+  async function sendCurrentExperience() {
+    await fetch(
+      "http://localhost:4567/update?name=" +
+        selectedCharacter +
+        "&new-val=" +
+        currentHealth +
+        "&field=currenthealth"
+    )
+      .then((response) => response.json())
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then(console.log("Submited current health"));
+  }
 
-  const sendCurrentGoldCoins =(e) => {
-    e.preventDefault();
-    const updateGold = {
-      name: charData.name,
-      gold: goldCoins,
-    };
-    submitUpdate(JSON.stringify(updateGold));
+  async function sendCurrentGoldCoins() {
+    await fetch(
+      "http://localhost:4567/update?name=" +
+        selectedCharacter +
+        "&new-val=" +
+        goldCoins +
+        "&field=gold"
+    )
+      .then((response) => response.json())
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then(console.log("Submited gold coins"));
   }
 
   async function getCharacters() {
@@ -144,14 +171,6 @@ export default function PlayPage() {
   /**
    * Send saved data of current health, experience, and gold coins  back to the server
    * */
-  async function submitUpdate(update) {
-    await fetch("http://localhost:4567/update?update=" + update)
-        .then((response) => response.json())
-        .catch((e) => {
-          throw new Error("server unavailable");
-        });
-  }
-
 
   async function submitDice() {
     await fetch(
@@ -247,7 +266,11 @@ export default function PlayPage() {
               ></Button>
               <Button
                 buttonText={"-"}
-                onClickAction={() => setCurrentHealth(currentHealth - 1)}
+                onClickAction={() =>
+                  setCurrentHealth(
+                    currentHealth - 1 < 0 ? currentHealth : currentHealth - 1
+                  )
+                }
               ></Button>
               <Button
                 buttonText={"Update"}
@@ -260,35 +283,45 @@ export default function PlayPage() {
                 value={experience} // <charData.current_experience>  need backend to add this field
               />
               <Button
-                  buttonText={"+"}
-                  onClickAction={() =>  setExperience(experience + 1)}
+                buttonText={"+"}
+                onClickAction={() => setExperience(experience + 1)}
               ></Button>
               <Button
-                  buttonText={"-"}
-                  onClickAction={() =>  setExperience(experience - 1)}
+                buttonText={"-"}
+                onClickAction={() =>
+                  setExperience(
+                    experience - 1 < 0 ? experience : experience - 1
+                  )
+                }
               ></Button>
-              <Button buttonText={"Update"}
-                      onClickAction={sendCurrentExperience}></Button>
+              <Button
+                buttonText={"Update"}
+                onClickAction={sendCurrentExperience}
+              ></Button>
             </HorizontalBox>
             <HorizontalBox>
               <Input label={"Gold Coins"} value={goldCoins}></Input>
               <Button
-                  buttonText={"+"}
-                  onClickAction={() =>  setGoldCoins(goldCoins + 1)}
+                buttonText={"+"}
+                onClickAction={() => setGoldCoins(goldCoins + 1)}
               ></Button>
               <Button
-                  buttonText={"-"}
-                  onClickAction={() =>  setGoldCoins(goldCoins - 1)}
+                buttonText={"-"}
+                onClickAction={() =>
+                  setGoldCoins(goldCoins - 1 < 0 ? goldCoins : goldCoins - 1)
+                }
               ></Button>
-              <Button buttonText={"Update"}
-                      onClickAction={sendCurrentGoldCoins}></Button>
+              <Button
+                buttonText={"Update"}
+                onClickAction={sendCurrentGoldCoins}
+              ></Button>
             </HorizontalBox>
           </VerticalBox>
           <verticalBox>
             <Button
-                onClickAction={onMainClick}
-                buttonText="Update"
-                buttonColor="blue"
+              onClickAction={onMainClick}
+              buttonText="Exit Game"
+              buttonColor="blue"
             />
           </verticalBox>
         </HorizontalBox>

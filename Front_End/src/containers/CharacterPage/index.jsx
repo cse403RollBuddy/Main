@@ -226,7 +226,9 @@ export default function CharacterPage() {
    * Update an ability score after rolling a dice
    * */
   const setAbility = (setAb, old) => {
-    setAb(old + score);
+    if (old + score < 21) {
+      setAb(old + score);
+    }
   };
 
   return (
