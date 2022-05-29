@@ -220,8 +220,6 @@ public class SparkServer {
         // value given by 'new-val'
         // currently only works for gold coins and current health
         // call it like "http://localhost:4567/update?name=Hunter&new-val=1000&field=gold"
-        // NOTE: updates will only be written to disk if the server is shut down cleanly
-        // via the /shutdown path, otherwise updates will be lost into the void...
         get("/update", (req, res) -> {
             //Get second & third parameters first since they are quickest.
             String field = req.queryParams("field");
@@ -247,6 +245,7 @@ public class SparkServer {
                 // case "someField": charToRoll.set_someField(newVal); break;
                 default:  return "Nothing updated";
             }
+            Character.writeCharacterToFile(charToUpdate);
             return "Success";
         });
     }
