@@ -1,8 +1,0 @@
-Hunter the Hunter
-FIGHTER
-DWARF
-CRIMINAL
-Level: 1
-12 16 19 14 9 11
-6/6
-Gold: 22
