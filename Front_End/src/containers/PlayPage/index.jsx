@@ -4,10 +4,9 @@ import { MainContainer } from "../../components/CenteredBox";
 import { useNavigate } from "react-router-dom";
 import { Nav } from "../../components/RollBuddyTitle";
 import DropDownList from "../../components/DropDownList";
-import CharacterPageService from "../CharacterPage/service";
 import Input from "../../components/Input";
-import Ability from "../../components/Ability";
-
+import { HorizontalBox } from "../../components/HorizontalBox";
+import { VerticalBox } from "../../components/VerticalBox";
 
 /**
  * This is the play page where a uer can choose a character to review
@@ -20,7 +19,7 @@ export default function PlayPage() {
   /**
    * Set Character details based on the picked character by the user
    * */
-  const[charData, setcharData] = useState([]);
+  const [charData, setCharData] = useState([]);
 
   /**
    * Provide all stored characters for the user to select for the game
@@ -32,32 +31,114 @@ export default function PlayPage() {
    * */
   const [selectedCharacter, setSelectedCharacter] = useState("");
 
-
   /**
    * Set the score returned from dice rolling
    * */
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState();
+
+  const [selectedRollType, setSelectedRollType] = useState("");
+
+  const [rollTypes, setRollTypes] = useState([]);
+
+  const [selectedRollAbility, setSelectedRollAbility] = useState("");
+
+  const [rollAbility, setRollAbility] = useState([]);
+
+  const [currentHealth, setCurrentHealth] = useState(0);
+
+  const [goldCoins, setGoldCoins] = useState(0);
+
+  const [experience, setExperience] = useState(0);
+
+  /* Save the character data and Navigate back to home page */
+
+  useEffect(() => {
+    getCharacters();
+    setRollTypes(["Regular", "Advantage", "Disadvantage"]);
+    setRollAbility([
+      "Strength",
+      "Charisma",
+      "Dexterity",
+      "Constitution",
+      "Intelligence",
+      "Wisdom",
+    ]);
+  }, []);
+
+  useEffect(() => {
+    getCharacterData();
+    if (!selectedCharacter) {
+      setExperience(0);
+      setGoldCoins(0);
+      setCurrentHealth(0);
+      setCharData([]);
+    }
+    // setAbility();
+  }, [selectedCharacter]);
+
+  useEffect(() => {
+    setCurrentHealth(charData.current_health ? charData.current_health : 0);
+    setExperience(charData.experience ? charData.experience : 0);
+    setGoldCoins(charData.gold_coins ? charData.gold_coins : 0);
+  }, [charData]);
 
   /**
-   * Navigate to HomePage
-   */
+   * Obtain all saved characters from the server
+   * */
+
   const onMainClick = (e) => {
     e.preventDefault();
     history("/HomePage");
   };
 
-  useEffect(() => {
-    getCharacters();
-  }, []);
+  const onExperienceChange = (e) => {
+    e.preventDefault();
+    setExperience(e.target.value);
+  };
 
-  useEffect(() => {
-    getCharacterData();
-    // setAbility();
-  }, [selectedCharacter]);
+  async function sendCurrentHealth() {
+    await fetch(
+      "http://localhost:4567/update?name=" +
+        selectedCharacter.value +
+        "&new-val=" +
+        currentHealth +
+        "&field=currenthealth"
+    )
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then(console.log("Submited current health"));
+  }
 
-  /**
-  * Obtain all saved characters from the server
-  * */
+  async function sendCurrentExperience() {
+    await fetch(
+      "http://localhost:4567/update?name=" +
+        selectedCharacter.value +
+        "&new-val=" +
+        currentHealth +
+        "&field=currenthealth"
+    )
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then(console.log("Submited current health"));
+  }
+
+  async function sendCurrentGoldCoins() {
+    await fetch(
+      "http://localhost:4567/update?name=" +
+        selectedCharacter.value +
+        "&new-val=" +
+        goldCoins +
+        "&field=gold"
+    )
+      .catch((e) => {
+        console.log(e);
+        throw new Error("server unavailable");
+      })
+      .then(console.log("Submited gold coins"));
+  }
+
   async function getCharacters() {
     await fetch("http://localhost:4567/characters")
       .then((response) => response.json())
@@ -69,24 +150,46 @@ export default function PlayPage() {
       });
   }
 
-
   /**
-  * Obtain selected character data from the server
-  * */
+   * Obtain selected character data from the server
+   * */
 
   async function getCharacterData() {
     if (selectedCharacter) {
-      await fetch("http://localhost:4567/select-character?name=" + selectedCharacter.value)
-          .then((response) => response.json())
-          .catch((e) => {
-            throw new Error("server unavailable");
-          })
-          .then((data) => {
-            setcharData(data);
-          });
+      await fetch(
+        "http://localhost:4567/select-character?name=" + selectedCharacter.value
+      )
+        .then((response) => response.json())
+        .catch((e) => {
+          throw new Error("server unavailable");
+        })
+        .then((data) => {
+          setCharData(data);
+        });
     }
   }
 
+  /**
+   * Send saved data of current health, experience, and gold coins  back to the server
+   * */
+
+  async function submitDice() {
+    await fetch(
+      "http://localhost:4567/abilityroll?name=" +
+        selectedCharacter.value +
+        "&ability=" +
+        selectedRollAbility.value +
+        "&roll-type=" +
+        selectedRollType.value
+    )
+      .then((response) => response.json())
+      .catch((e) => {
+        throw new Error("server unavailable");
+      })
+      .then((data) => {
+        setScore(data);
+      });
+  }
 
   /* List all the abilities as input box now, consider to use a form component later */
   return (
@@ -95,47 +198,175 @@ export default function PlayPage() {
         <h1 className="app-title">ROLLBUDDY</h1>
       </Nav>
       <MainContainer>
-        <DropDownList
-          label={"Select a character"}
-          value={selectedCharacter}
-          maxMenuHeight={150}
-          setSelectedOptions={setSelectedCharacter}
-          list={characters.map((name) => ({
-            value: name,
-            label: name,
-          }))}
-          isMulti={false}
-        />
-        <Input
-          label={"Strength"}
-          value={charData.strength}
-        />
-        <Input
-          label={"Charisma"}
-          value={charData.charisma}
-        />
-        <Input
-          label={"Dexterity"}
-          value={charData.dexterity}
-        />
-        <Input
-          label={"Constitution"}
-          value={charData.constitution}
-        />
-        <Input
-          label={"Intelligence"}
-          value={charData.intelligence}
-        />
-        <Input
-          label={"Wisdom"}
-          value={charData.wisdom}
-        />
-
-        <Button
-          onClickAction={onMainClick}
-          buttonText="Update"
-          buttonColor="blue"
-        />
+        <HorizontalBox>
+          <DropDownList
+            label={"Select a character"}
+            value={selectedCharacter}
+            maxMenuHeight={150}
+            setSelectedOptions={setSelectedCharacter}
+            list={characters.map((name) => ({
+              value: name,
+              label: name,
+            }))}
+            isMulti={false}
+          />
+          <Input label={"Race"} readonly={true} value={charData.race} />
+          <Input label={"Class"} readonly={true} value={charData.classtype} />
+          <Input
+            label={"Background"}
+            readonly={true}
+            value={charData.background}
+          />
+          <Input label={"Level"} readonly={true} value={charData.level} />
+        </HorizontalBox>
+        <HorizontalBox>
+          <VerticalBox>
+            <Input
+              label={"Strength"}
+              readonly={true}
+              value={charData.strength}
+            />
+            <Input
+              label={"Charisma"}
+              readonly={true}
+              value={charData.charisma}
+            />
+            <Input
+              label={"Dexterity"}
+              readonly={true}
+              value={charData.dexterity}
+            />
+            <Input
+              label={"Constitution"}
+              readonly={true}
+              value={charData.constitution}
+            />
+            <Input
+              label={"Intelligence"}
+              readonly={true}
+              value={charData.intelligence}
+            />
+            <Input label={"Wisdom"} readonly={true} value={charData.wisdom} />
+          </VerticalBox>
+          <VerticalBox>
+            <Input
+              label="Max Health"
+              readonly={true}
+              value={charData.max_health}
+            />
+            <HorizontalBox>
+              <Input
+                label="Current Health"
+                readonly={true}
+                value={currentHealth}
+              />
+              <Button
+                buttonText={"+"}
+                onClickAction={() =>
+                  setCurrentHealth(parseInt(currentHealth + 1))
+                }
+              ></Button>
+              <Button
+                buttonText={"-"}
+                onClickAction={() =>
+                  setCurrentHealth(
+                    currentHealth - 1 < 0 ? currentHealth : currentHealth - 1
+                  )
+                }
+              ></Button>
+              <Button
+                buttonText={"Update"}
+                onClickAction={sendCurrentHealth}
+              ></Button>
+            </HorizontalBox>
+            <HorizontalBox>
+              <Input
+                label="Experience"
+                value={experience} // <charData.current_experience>  need backend to add this field
+              />
+              <Button
+                buttonText={"+"}
+                onClickAction={() => setExperience(experience + 1)}
+              ></Button>
+              <Button
+                buttonText={"-"}
+                onClickAction={() =>
+                  setExperience(
+                    experience - 1 < 0 ? experience : experience - 1
+                  )
+                }
+              ></Button>
+              <Button
+                buttonText={"Update"}
+                onClickAction={sendCurrentExperience}
+              ></Button>
+            </HorizontalBox>
+            <HorizontalBox>
+              <Input label={"Gold Coins"} value={goldCoins}></Input>
+              <Button
+                buttonText={"+"}
+                onClickAction={() => setGoldCoins(goldCoins + 1)}
+              ></Button>
+              <Button
+                buttonText={"-"}
+                onClickAction={() =>
+                  setGoldCoins(goldCoins - 1 < 0 ? goldCoins : goldCoins - 1)
+                }
+              ></Button>
+              <Button
+                buttonText={"Update"}
+                onClickAction={sendCurrentGoldCoins}
+              ></Button>
+            </HorizontalBox>
+          </VerticalBox>
+          <VerticalBox>
+            <Button
+              onClickAction={onMainClick}
+              buttonText="Exit Game"
+              buttonColor="blue"
+            />
+          </VerticalBox>
+        </HorizontalBox>
+        <HorizontalBox>
+          <VerticalBox>
+            <DropDownList
+              label={"Choose Roll"}
+              value={selectedRollType}
+              maxMenuHeight={150}
+              setSelectedOptions={setSelectedRollType}
+              list={rollTypes.map((name) => ({
+                value: name,
+                label: name,
+              }))}
+              isMulti={false}
+            />
+            <DropDownList
+              label={"Choose Ability"}
+              value={selectedRollAbility}
+              maxMenuHeight={150}
+              setSelectedOptions={setSelectedRollAbility}
+              list={rollAbility.map((name) => ({
+                value: name,
+                label: name,
+              }))}
+              isMulti={false}
+            />
+          </VerticalBox>
+          <Button
+            buttonColor={"red"}
+            onClickAction={submitDice}
+            buttonText="Roll Dice "
+          />
+        </HorizontalBox>
+        <HorizontalBox>
+          <Input label="High" value={score === undefined ? "" : score.high} />
+          <Input label="Low" value={score === undefined ? "" : score.low} />
+          <Input
+            label="Modifier"
+            value={score === undefined ? "" : score.mod}
+          />
+          <Input label="Total" value={score === undefined ? "" : score.total} />
+        </HorizontalBox>
       </MainContainer>
     </div>
   );
