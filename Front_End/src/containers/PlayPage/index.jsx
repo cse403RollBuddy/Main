@@ -161,9 +161,11 @@ export default function PlayPage() {
         })
         .then((data) => {
           setCharData(data);
-          setCurrentHealth(charData.current_health);
-          setExperience(2); // need data from backend
-          setGoldCoins(charData.gold_coins);
+          setCurrentHealth(
+            charData.current_health ? charData.current_health : 0
+          );
+          setExperience(charData.experience ? charData.experience : 0);
+          setGoldCoins(charData.gold_coins ? charData.gold_coins : 0);
         });
     }
   }
@@ -262,7 +264,9 @@ export default function PlayPage() {
               />
               <Button
                 buttonText={"+"}
-                onClickAction={() => setCurrentHealth(currentHealth + 1)}
+                onClickAction={() =>
+                  setCurrentHealth(parseInt(currentHealth + 1))
+                }
               ></Button>
               <Button
                 buttonText={"-"}
