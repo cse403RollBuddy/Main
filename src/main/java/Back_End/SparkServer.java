@@ -211,6 +211,16 @@ public class SparkServer {
 
             // write character
             Character.writeCharacterToFile(newChar);
+            for (int i = 0; i < charList.size(); i++) {
+                Character c = charList.get(i);
+                if (c.get_name().trim().equals(newChar.get_name().trim())) {
+                    // found character with the same name;
+                    // remove it
+                    charList.remove(i);
+                    break;
+                }
+            }
+            // add the new character and return it no matter what
             charList.add(newChar);
             return gson.toJson(newCharInfo);
         });
