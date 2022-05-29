@@ -99,12 +99,11 @@ export default function PlayPage() {
   async function sendCurrentHealth() {
     await fetch(
       "http://localhost:4567/update?name=" +
-        selectedCharacter +
+        selectedCharacter.value +
         "&new-val=" +
         currentHealth +
         "&field=currenthealth"
     )
-      .then((response) => response.json())
       .catch((e) => {
         throw new Error("server unavailable");
       })
@@ -114,12 +113,11 @@ export default function PlayPage() {
   async function sendCurrentExperience() {
     await fetch(
       "http://localhost:4567/update?name=" +
-        selectedCharacter +
+        selectedCharacter.value +
         "&new-val=" +
         currentHealth +
         "&field=currenthealth"
     )
-      .then((response) => response.json())
       .catch((e) => {
         throw new Error("server unavailable");
       })
@@ -129,13 +127,13 @@ export default function PlayPage() {
   async function sendCurrentGoldCoins() {
     await fetch(
       "http://localhost:4567/update?name=" +
-        selectedCharacter +
+        selectedCharacter.value +
         "&new-val=" +
         goldCoins +
         "&field=gold"
     )
-      .then((response) => response.json())
       .catch((e) => {
+        console.log(e);
         throw new Error("server unavailable");
       })
       .then(console.log("Submited gold coins"));
@@ -170,7 +168,6 @@ export default function PlayPage() {
         });
     }
   }
-  console.log(charData);
 
   /**
    * Send saved data of current health, experience, and gold coins  back to the server
