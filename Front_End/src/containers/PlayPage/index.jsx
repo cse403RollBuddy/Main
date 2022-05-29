@@ -76,6 +76,12 @@ export default function PlayPage() {
     // setAbility();
   }, [selectedCharacter]);
 
+  useEffect(() => {
+    setCurrentHealth(charData.current_health ? charData.current_health : 0);
+    setExperience(charData.experience ? charData.experience : 0);
+    setGoldCoins(charData.gold_coins ? charData.gold_coins : 0);
+  }, [charData]);
+
   /**
    * Obtain all saved characters from the server
    * */
@@ -161,14 +167,10 @@ export default function PlayPage() {
         })
         .then((data) => {
           setCharData(data);
-          setCurrentHealth(
-            charData.current_health ? charData.current_health : 0
-          );
-          setExperience(charData.experience ? charData.experience : 0);
-          setGoldCoins(charData.gold_coins ? charData.gold_coins : 0);
         });
     }
   }
+  console.log(charData);
 
   /**
    * Send saved data of current health, experience, and gold coins  back to the server
@@ -188,7 +190,6 @@ export default function PlayPage() {
         throw new Error("server unavailable");
       })
       .then((data) => {
-        console.log(data);
         setScore(data);
       });
   }
@@ -321,13 +322,13 @@ export default function PlayPage() {
               ></Button>
             </HorizontalBox>
           </VerticalBox>
-          <verticalBox>
+          <VerticalBox>
             <Button
               onClickAction={onMainClick}
               buttonText="Exit Game"
               buttonColor="blue"
             />
-          </verticalBox>
+          </VerticalBox>
         </HorizontalBox>
         <HorizontalBox>
           <VerticalBox>
