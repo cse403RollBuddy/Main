@@ -1,9 +1,9 @@
-#User Manual
+# User Manual
 
 RollBuddy is a D&D Character Sheet Companion that allows D&D5E players level up their D&D playing experience. This application provides a digital version of the traditional D&D character sheet, with some modern upgrades. With RollBuddy, players can create or import characters, track changing aspects to the character through multiple play sessions, and view character information in an intuitive UI. Most importantly, it will also tell players what their bonuses are to various kinds of rolls, allow players to actually simulate rolling the dice within the application, and automatically apply the modifiers to display the final result.
 
 
-##Installation Guide
+## Installation Guide
 
 1. Install JDK 11, instructions and download found here ([https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html))
 2. Install node.js, instructions and download found here ([https://nodejs.org/en/download/](https://nodejs.org/en/download/))
@@ -16,7 +16,7 @@ RollBuddy is a D&D Character Sheet Companion that allows D&D5E players level up 
 9. Run ‘npm i styled-components’
 
 
-##Start Guide:
+## Start Guide:
 
 1. Open a terminal window
 2. Navigate to the overall RollBuddy directory
@@ -29,7 +29,7 @@ RollBuddy is a D&D Character Sheet Companion that allows D&D5E players level up 
 9. A webpage will open in your browser, this is the RollBuddy application!
 
 
-##Use Guide:
+## Use Guide:
 
 1. Follow the start guide to open the application. This takes you to the front page of the application
 2. Click ‘Enter Homepage’ to begin.
@@ -40,28 +40,20 @@ RollBuddy is a D&D Character Sheet Companion that allows D&D5E players level up 
 7. Work in Progress: to roll the dice during play, use dropdown menus to select what kind of roll, then press the button to simulate the roll and see the result
 
 
-##Report a Bug:
+## Report a Bug:
 
 If you encounter a bug with the software, please let us know! You can report bugs here ([https://github.com/cse403RollBuddy/Main/issues](https://github.com/cse403RollBuddy/Main/issues)) by clicking “New Issue” on the right side of the browser.
 
 In your bug report, please follow this template.
 
-Title: short, descriptive name
-
+`Title: short, descriptive name
 Component: what part of the application does it effect?
-
 Version: what version of the software has the bug?
-
 OS: which operating system are you using?
-
 Browser: which browser are you using?
-
 Detailed Description: go into the details of the problem you encountered
-
 Steps to Reproduce: describe the steps to encounter this bug
-
 Actual Results: what the application did after you encountered the bug
-
-Expected Results: what the application should have done instead
+Expected Results: what the application should have done instead`
 
 For more information about how to write a helpful bug report, refer to this page here ([https://bugzilla.mozilla.org/page.cgi?id=bug-writing.html](https://bugzilla.mozilla.org/page.cgi?id=bug-writing.html))
