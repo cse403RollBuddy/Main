@@ -1,6 +1,6 @@
 # User Manual
 
-RollBuddy is a D&D Character Sheet Companion that allows D&D5E players level up their D&D playing experience. This application provides a digital version of the traditional D&D character sheet, with some modern upgrades. With RollBuddy, players can create or import characters, track changing aspects to the character through multiple play sessions, and view character information in an intuitive UI. Most importantly, it will also tell players what their bonuses are to various kinds of rolls, allow players to actually simulate rolling the dice within the application, and automatically apply the modifiers to display the final result.
+RollBuddy is a D&D Character Sheet Companion. It is an application that replaces the traditional character sheet used by players of the tabletop role playing game Dungeons & Dragons (or D&D), and allows D&D5E players level up their D&D playing experience. This application provides a digital version of the traditional D&D character sheet, with some modern upgrades. With RollBuddy, players can create or import characters, track changing aspects to the character through multiple play sessions, and view character information in an intuitive UI. Most importantly, it will also tell players what their bonuses are to various kinds of rolls, allow players to actually simulate rolling the dice within the application, and automatically apply the modifiers to display the final result.
 
 
 ## Installation Guide
