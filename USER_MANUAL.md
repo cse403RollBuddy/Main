@@ -46,22 +46,14 @@ If you encounter a bug with the software, please let us know! You can report bug
 
 In your bug report, please follow this template.
 
-`Title: short, descriptive name
-
-Component: what part of the application does it effect?
-
-Version: what version of the software has the bug?
-
-OS: which operating system are you using?
-
-Browser: which browser are you using?
-
-Detailed Description: go into the details of the problem you encountered
-
-Steps to Reproduce: describe the steps to encounter this bug
-
-Actual Results: what the application did after you encountered the bug
-
-Expected Results: what the application should have done instead`
+`Title: short, descriptive name`
+`Component: what part of the application does it effect?`
+`Version: what version of the software has the bug?`
+`OS: which operating system are you using?`
+`Browser: which browser are you using?`
+`Detailed Description: go into the details of the problem you encountered`
+`Steps to Reproduce: describe the steps to encounter this bug`
+`Actual Results: what the application did after you encountered the bug`
+`Expected Results: what the application should have done instead`
 
 For more information about how to write a helpful bug report, refer to this page here ([https://bugzilla.mozilla.org/page.cgi?id=bug-writing.html](https://bugzilla.mozilla.org/page.cgi?id=bug-writing.html))
