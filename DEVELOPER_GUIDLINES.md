@@ -17,7 +17,7 @@ Clone the repository with ‘git clone [https://github.com/cse403RollBuddy/Main.
     * main/java/backend: This is where the back end code can be found, including the character files, SparkServer code, CORSFilter, Character class, Dice class, and relevant enums for Race, Background, and Class can be found.
 
 
-##Instructions to Build and Test the System:
+## Instructions to Build and Test the System:
 
 Backend server:
 
