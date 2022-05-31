@@ -36,21 +36,45 @@ export default function PlayPage() {
    * */
   const [score, setScore] = useState();
 
+  /**
+   * Set the type of roll for dice rolling
+   * */
   const [selectedRollType, setSelectedRollType] = useState("");
 
+  /**
+   * List of roll types: regular, advantage, disadvantage
+   * */
   const [rollTypes, setRollTypes] = useState([]);
 
+  /**
+   * Set the type of Ability for dice rolling
+   * */
   const [selectedRollAbility, setSelectedRollAbility] = useState("");
 
+  /**
+   * Ability options available for dice rolling
+   * */
   const [rollAbility, setRollAbility] = useState([]);
 
+  /**
+   * Set the current health score for the character
+   * */
   const [currentHealth, setCurrentHealth] = useState(0);
 
+  /**
+   * Set the current gold coin score for the character
+   * */
   const [goldCoins, setGoldCoins] = useState(0);
 
+  /**
+   * Set the current experience score for the character
+   * */
   const [experience, setExperience] = useState(0);
 
-  /* Save the character data and Navigate back to home page */
+  /**
+   * Obtain saved characters from the backend server
+   * Provide options of roll types and ability types for dice rolling
+   * */
 
   useEffect(() => {
     getCharacters();
@@ -65,6 +89,9 @@ export default function PlayPage() {
     ]);
   }, []);
 
+  /**
+   * Obtain selected character data
+   * */
   useEffect(() => {
     getCharacterData();
     if (!selectedCharacter) {
@@ -76,6 +103,9 @@ export default function PlayPage() {
     // setAbility();
   }, [selectedCharacter]);
 
+  /**
+   * Set and render health, experience, and gold coin scores
+   * */
   useEffect(() => {
     setCurrentHealth(charData.current_health ? charData.current_health : 0);
     setExperience(charData.experience ? charData.experience : 0);
@@ -83,8 +113,8 @@ export default function PlayPage() {
   }, [charData]);
 
   /**
-   * Obtain all saved characters from the server
-   * */
+   * Update the character data and Navigate to HomePage
+   */
 
   const onMainClick = (e) => {
     e.preventDefault();
@@ -96,6 +126,9 @@ export default function PlayPage() {
     setExperience(e.target.value);
   };
 
+  /**
+   * Send current health score to the server
+   * */
   async function sendCurrentHealth() {
     await fetch(
       "http://localhost:4567/update?name=" +
@@ -110,6 +143,9 @@ export default function PlayPage() {
       .then(console.log("Submited current health"));
   }
 
+  /**
+   * Send current experience score to the server
+   * */
   async function sendCurrentExperience() {
     await fetch(
       "http://localhost:4567/update?name=" +
@@ -124,6 +160,9 @@ export default function PlayPage() {
       .then(console.log("Submited current health"));
   }
 
+  /**
+   * Send current gold coin score to the server
+   * */
   async function sendCurrentGoldCoins() {
     await fetch(
       "http://localhost:4567/update?name=" +
@@ -139,6 +178,9 @@ export default function PlayPage() {
       .then(console.log("Submited gold coins"));
   }
 
+  /**
+   * fetch saved character list from the backend server
+   * */
   async function getCharacters() {
     await fetch("http://localhost:4567/characters")
       .then((response) => response.json())
@@ -170,7 +212,7 @@ export default function PlayPage() {
   }
 
   /**
-   * Send saved data of current health, experience, and gold coins  back to the server
+   * send the selected type and ability to the backedn to get dice roll result
    * */
 
   async function submitDice() {
