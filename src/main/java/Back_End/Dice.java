@@ -57,23 +57,24 @@ public class Dice {
 
         //Calc modifier 
         int proficiency;
+      
         switch(ability) {
-                case "charisma" : proficiency = currChar.get_charisma();
+                case "Charisma" : proficiency = currChar.get_charisma();
                     break;
-                case "constitution" : proficiency = currChar.get_constitution();
+                case "Constitution" : proficiency = currChar.get_constitution();
                     break;
-                case "dexterity" : proficiency = currChar.get_dexterity();
+                case "Dexterity" : proficiency = currChar.get_dexterity();
                     break;
-                case "intelligence" : proficiency = currChar.get_intelligence();
+                case "Intelligence" : proficiency = currChar.get_intelligence();
                     break;
-                case "strength" : proficiency = currChar.get_strength();
+                case "Strength" : proficiency = currChar.get_strength();
                     break;
-                case "wisdom" : proficiency = currChar.get_wisdom();
+                case "Wisdom" : proficiency = currChar.get_wisdom();
                     break;
 
                 default: proficiency = 0;
                     break;
-            }
+            } 
 
         proficiency = (proficiency / 2) - 5;
 
