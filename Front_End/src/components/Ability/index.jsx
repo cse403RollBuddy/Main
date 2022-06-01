@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Button from "../Button";
-import { MainContainer } from "../CenteredBox";
 import React from "react";
 
 export const InputBox = styled.input`

@@ -101,6 +101,7 @@ export default function PlayPage() {
       setCharData([]);
     }
     // setAbility();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCharacter]);
 
   /**
@@ -119,11 +120,6 @@ export default function PlayPage() {
   const onMainClick = (e) => {
     e.preventDefault();
     history("/HomePage");
-  };
-
-  const onExperienceChange = (e) => {
-    e.preventDefault();
-    setExperience(e.target.value);
   };
 
   /**
