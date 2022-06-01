@@ -2,7 +2,6 @@
 
 RollBuddy is a D&D Character Sheet Companion. It is an application that replaces the traditional character sheet used by players of the tabletop role playing game Dungeons & Dragons (or D&D), and allows D&D5E players level up their D&D playing experience. This application provides a digital version of the traditional D&D character sheet, with some modern upgrades. With RollBuddy, players can create or import characters, track changing aspects to the character through multiple play sessions, and view character information in an intuitive UI. Most importantly, it will also tell players what their bonuses are to various kinds of rolls, allow players to actually simulate rolling the dice within the application, and automatically apply the modifiers to display the final result.
 
-
 ## Installation Guide
 
 1. Install JDK 11, instructions and download found here ([https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html))
@@ -15,7 +14,6 @@ RollBuddy is a D&D Character Sheet Companion. It is an application that replaces
 8. Run ‘npm i react-script’
 9. Run ‘npm i styled-components’
 
-
 ## Start Guide:
 
 1. Open a terminal window
@@ -26,8 +24,8 @@ RollBuddy is a D&D Character Sheet Companion. It is an application that replaces
 6. Navigate to the overall RollBuddy directory
 7. Navigate into the Front_End directory (~/Main/Front_End)
 8. Run ‘npm start’
-9. A webpage will open in your browser, this is the RollBuddy application!
-
+9. Alternatively we have written a scirpt to do both, just run ./run_app.sh in the parent directory.
+10. A webpage will open in your browser, this is the RollBuddy application!
 
 ## Use Guide:
 
@@ -38,7 +36,6 @@ RollBuddy is a D&D Character Sheet Companion. It is an application that replaces
 5. Once you have created the character, click ‘Update and Play’ to use this character
 6. Work in Progress: to update character information during play, use buttons to change the current health points, gold coins, or experience of the character.
 7. Work in Progress: to roll the dice during play, use dropdown menus to select what kind of roll, then press the button to simulate the roll and see the result
-
 
 ## Report a Bug:
 

@@ -4,7 +4,6 @@
 
 Clone the repository with ‘git clone [https://github.com/cse403RollBuddy/Main.git](https://github.com/cse403RollBuddy/Main.git)’
 
-
 ## Layout of Directory Structure:
 
 - Front_End: This is where the front end code lives. The react application code is here, as well as integration test code.
@@ -45,9 +44,7 @@ Testing
 
 1. Ensure you have the correct system requirements for both Backend and Frontend
 2. From a terminal, clone the GitHub repo and enter the newly created directory
-3. In the overall directory (i.e. ~/Main/), run ./gradlew build then ./gradlew run
-4. In another terminal, navigate to the Front End directory (i.e. ~/Main/Front_End/) and run npm start
-5. A website should pop up in your default browser, enjoy Roll Buddy!
+3. In the overall directory (i.e. ~/Main/), run ./run_app.sh, make sure you have given this script run permissions.
 
 ## Adding New Tests:
 
