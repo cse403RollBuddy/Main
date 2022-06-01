@@ -23,5 +23,6 @@ jobs:
       - run: npm --prefix Front_End/ ci
       - run: npm --prefix Front_End/ run build
       - run: sh ./run_backend.sh & PIDMIX=$!
-      - run: npm --prefix Front_End/ test
+      - run: npm --prefix Front_End/ test PIDIOS=$!
+      - run: wait $PIDIOS
       - run: wait $PIDIOS
