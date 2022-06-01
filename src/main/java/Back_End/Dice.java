@@ -27,8 +27,14 @@ public class Dice {
     /**
      * A method that rolls the D20 and adds the character's proficiency to indicate their ability to perform a task.
      * 
-     * @param proficiency An integer value to add to the roll, indicating the bonus the current character has at the given task
-     * @return An integer value that indicates the ability check score for a given task
+     * @param currChar the Character object who's stats are beign used for this roll
+     * @param ability a String corresponding ability this check is for "strength, charisma, etc"
+     * @param type a String that corresponding type of roll "advantag, disadvantage or regular"
+     * @return a map with Strings as the keys and Integers as the values 
+     *          {high: "the high roll of 2 rolls",
+     *           low: "the low roll of 2 rolls",
+     *           mod: "the proficiency added to this check",
+     *           total: "the final number to use depending on the type of roll"}
      */
 
     public static Map<String, Integer> RollAC(Character currChar, String ability, String type) {
@@ -53,14 +59,22 @@ public class Dice {
         int proficiency;
         switch(ability) {
                 case "charisma" : proficiency = currChar.get_charisma();
+                    break;
                 case "constitution" : proficiency = currChar.get_constitution();
+                    break;
                 case "dexterity" : proficiency = currChar.get_dexterity();
+                    break;
                 case "intelligence" : proficiency = currChar.get_intelligence();
+                    break;
                 case "strength" : proficiency = currChar.get_strength();
+                    break;
                 case "wisdom" : proficiency = currChar.get_wisdom();
+                    break;
 
                 default: proficiency = 0;
+                    break;
             }
+
         proficiency = (proficiency / 2) - 5;
 
         roll_data.put("mod", proficiency);
