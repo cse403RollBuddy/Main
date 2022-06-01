@@ -1,0 +1,28 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 15.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm --prefix Front_End/ ci
+      - run: npm --prefix Front_End/ run build
+      - run: sh ./run_backend.sh & PIDMIX=$!
+      - run: npm --prefix Front_End/ test & PIDIOS=$!
+      - run: wait $PIDIOS
+      - run: wait $PIDMIX

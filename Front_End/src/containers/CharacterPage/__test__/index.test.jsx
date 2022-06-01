@@ -1,5 +1,3 @@
-import React from "react";
-import HomePage from "../index";
 import CharacterPageService from "../service";
 
 describe("Testing fetch", () => {
@@ -29,8 +27,8 @@ describe("Testing fetch", () => {
 
   it("Tests getSelectedCharacter", async () => {
     const stats = {
-      b: "CRIMINAL",
-      c: "ROGUE",
+      background: "CRIMINAL",
+      classtype: "ROGUE",
       charisma: 3,
       constitution: 13,
       current_health: 5,
@@ -39,8 +37,8 @@ describe("Testing fetch", () => {
       intelligence: 5,
       level: 1,
       max_health: 5,
-      n: "Steve The Sneaky",
-      r: "HALFLING",
+      name: "Steve The Sneaky",
+      race: "HALFLING",
       strength: 10,
       wisdom: 6,
     };

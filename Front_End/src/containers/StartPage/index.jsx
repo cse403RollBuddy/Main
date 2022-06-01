@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
-import {Nav, RollBuddyTitle} from "../../components/RollBuddyTitle";
+import { Nav } from "../../components/RollBuddyTitle";
 
 /**
  * This is the enter page when the application starts
@@ -21,7 +21,7 @@ export default function StartPage() {
   return (
     <div>
       <Nav>
-         <h1 className="app-title">ROLLBUDDY</h1>
+        <h1 className="app-title">ROLLBUDDY</h1>
       </Nav>
       <MainContainer>
         <Button

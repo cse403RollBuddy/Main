@@ -3,8 +3,7 @@ import Button from "../../components/Button";
 import { MainContainer } from "../../components/CenteredBox";
 import Input from "../../components/Input/index";
 import DropDownList from "../../components/DropDownList/index";
-import { Nav, RollBuddyTitle } from "../../components/RollBuddyTitle";
-import CharacterPageService from "./service";
+import { Nav } from "../../components/RollBuddyTitle";
 import { useNavigate } from "react-router-dom";
 import Ability from "../../components/Ability";
 
@@ -120,6 +119,7 @@ export default function CharacterPage() {
 
   useEffect(() => {
     getAbilityScores();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRace]);
 
   /**
