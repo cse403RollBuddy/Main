@@ -1,5 +1,3 @@
-import React from "react";
-import HomePage from "../index";
 import CharacterPageService from "../service";
 
 describe("Testing fetch", () => {
