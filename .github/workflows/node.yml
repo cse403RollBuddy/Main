@@ -20,4 +20,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm --prefix Front_End/build
+      - run: npm --prefix Front_End/ ci
+      - run: npm --prefix Front_End/ run build
+      - run: npm --prefix Front_End/ test
